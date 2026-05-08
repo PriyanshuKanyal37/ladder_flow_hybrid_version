@@ -31,7 +31,7 @@ export default function LoginPage() {
       const params = new URLSearchParams();
       params.append('username', email);
       params.append('password', password);
-      const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000';
+      const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? '';
       const res = await fetch(`${API_URL}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },

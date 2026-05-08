@@ -39,7 +39,7 @@ export default function SignupPage() {
     setLoading(true);
     setError('');
     try {
-      const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000';
+      const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? '';
       const registerRes = await fetch(`${API_URL}/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

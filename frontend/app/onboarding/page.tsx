@@ -276,7 +276,7 @@ export default function OnboardingPage() {
     try {
       const token = getToken();
       if (!token) throw new Error('Not authenticated');
-      const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000';
+      const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? '';
       const tabooWords = form.taboo_words
         .split(',')
         .map((word) => word.trim())
