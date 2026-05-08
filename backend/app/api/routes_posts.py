@@ -89,6 +89,8 @@ def _row_for_platform(interview: Interview, platform: Platform) -> Optional[Post
 def _row_for_output(output: ContentOutput, topic: Optional[str]) -> Optional[PostOut]:
     if output.status == "archived":
         return None
+    if output.platform not in ("linkedin", "x", "twitter"):
+        return None
     return PostOut(
         output_id=output.id,
         interview_id=output.interview_id,
