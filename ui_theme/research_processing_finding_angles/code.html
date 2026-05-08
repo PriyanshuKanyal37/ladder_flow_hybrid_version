@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Research Processing — Ladder Flow</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#ffb4a4",
+            "on-tertiary-fixed-variant": "#653e00",
+            "on-surface": "#e5e2e1",
+            "surface-container-highest": "#353534",
+            "surface-bright": "#3a3939",
+            "surface": "#131313",
+            "inverse-on-surface": "#313030",
+            "on-secondary-container": "#ffd0dc",
+            "error-container": "#93000a",
+            "tertiary-fixed-dim": "#ffb95f",
+            "on-primary-container": "#580a00",
+            "secondary-fixed-dim": "#ffb1c7",
+            "on-surface-variant": "#e2bfb7",
+            "tertiary-fixed": "#ffddb8",
+            "on-secondary-fixed": "#3f001c",
+            "on-primary-fixed": "#3e0500",
+            "surface-variant": "#353534",
+            "on-tertiary-fixed": "#2a1700",
+            "surface-container": "#201f1f",
+            "on-error": "#690005",
+            "inverse-primary": "#b22c11",
+            "error": "#ffb4ab",
+            "surface-tint": "#ffb4a4",
+            "on-primary-fixed-variant": "#8d1600",
+            "primary-container": "#f85d3e",
+            "outline": "#a98a83",
+            "on-error-container": "#ffdad6",
+            "inverse-surface": "#e5e2e1",
+            "outline-variant": "#5a413b",
+            "tertiary-container": "#ca8100",
+            "on-secondary": "#650031",
+            "on-tertiary": "#472a00",
+            "background": "#0F0F0F",
+            "secondary-fixed": "#ffd9e2",
+            "surface-container-lowest": "#0e0e0e",
+            "on-primary": "#640d00",
+            "surface-container-low": "#1c1b1b",
+            "on-secondary-fixed-variant": "#8e0048",
+            "primary-fixed-dim": "#ffb4a4",
+            "surface-container-high": "#2a2a2a",
+            "tertiary": "#ffb95f",
+            "on-tertiary-container": "#3e2400",
+            "secondary-container": "#be0062",
+            "primary-fixed": "#ffdad3",
+            "secondary": "#ffb1c7",
+            "on-background": "#e5e2e1",
+            "surface-dim": "#131313",
+            "accent": "#E95335"
+          },
+          fontFamily: {
+            "headline": ["Inter", "sans-serif"],
+            "body": ["Inter", "sans-serif"],
+            "label": ["Inter", "sans-serif"],
+            "mono": ["JetBrains Mono", "monospace"]
+          },
+          borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem", "card": "1.25rem"},
+        },
+      },
+    }
+  </script>
+<style>
+    .glass-card {
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(24px);
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      border-left: 1px solid rgba(255, 255, 255, 0.06);
+      border-right: 1px solid rgba(255, 255, 255, 0.06);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.50);
+    }
+    .orb-glow {
+      background: radial-gradient(circle at center, rgba(233, 83, 53, 0.15) 0%, rgba(233, 83, 53, 0) 70%);
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+</head>
+<body class="bg-[#0F0F0F] text-[#F5F5F5] font-body min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
+<!-- Background Ambient Glow -->
+<div class="fixed inset-0 z-0 flex items-center justify-center">
+<div class="w-[800px] h-[800px] orb-glow rounded-full"></div>
+</div>
+<!-- Header Section (Navigation Suppression Logic Applied) -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-[#0F0F0F]/80 backdrop-blur-xl border-b border-white/5">
+<div class="text-xl font-bold text-[#E95335] tracking-tight font-headline">Ladder Flow</div>
+<div class="hidden md:flex items-center gap-6">
+<span class="material-symbols-outlined text-[#9CA3AF] cursor-pointer hover:text-[#F5F5F5] transition-colors">account_circle</span>
+</div>
+</header>
+<!-- Content Container -->
+<main class="relative z-10 w-full max-w-4xl px-4 py-24 flex flex-col items-center">
+<!-- Progress Stepper -->
+<nav class="flex items-center gap-3 mb-12">
+<!-- Step 1: Completed -->
+<div class="px-4 py-2 rounded-full glass-card flex items-center gap-2 border border-emerald-500/30">
+<span class="material-symbols-outlined text-emerald-500 text-sm" style="font-variation-settings: 'wght' 700;">check_circle</span>
+<span class="text-xs font-semibold tracking-wider uppercase text-emerald-500">Keywords</span>
+</div>
+<div class="w-8 h-[1px] bg-white/10"></div>
+<!-- Step 2: Active -->
+<div class="px-5 py-2 rounded-full bg-[#E95335] shadow-[0_0_16px_rgba(233,83,53,0.3)] flex items-center gap-2">
+<span class="text-xs font-bold tracking-wider uppercase text-white">Research</span>
+</div>
+<div class="w-8 h-[1px] bg-white/10"></div>
+<!-- Step 3: Upcoming -->
+<div class="px-4 py-2 rounded-full glass-card opacity-50 flex items-center gap-2">
+<span class="text-xs font-semibold tracking-wider uppercase text-[#9CA3AF]">Outline</span>
+</div>
+<div class="w-8 h-[1px] bg-white/10"></div>
+<!-- Step 4: Upcoming -->
+<div class="px-4 py-2 rounded-full glass-card opacity-50 flex items-center gap-2">
+<span class="text-xs font-semibold tracking-wider uppercase text-[#9CA3AF]">Interview</span>
+</div>
+</nav>
+<!-- Main Research Card -->
+<section class="w-full max-w-[520px] glass-card rounded-card p-10 flex flex-col items-center">
+<!-- Animated Icon Area -->
+<div class="relative mb-8">
+<div class="absolute inset-0 bg-[#E95335]/20 blur-2xl rounded-full scale-125"></div>
+<div class="w-20 h-20 rounded-full bg-[#1A1A1A] border-2 border-[#E95335]/30 flex items-center justify-center relative z-10">
+<span class="material-symbols-outlined text-[#E95335] text-4xl" data-icon="travel_explore">travel_explore</span>
+</div>
+</div>
+<!-- Header Copy -->
+<h1 class="text-2xl font-bold text-[#F5F5F5] mb-2 font-headline">Finding your best angles...</h1>
+<p class="text-[#9CA3AF] text-sm mb-10 font-body">Real research. Not a spinner.</p>
+<!-- Progress Rows -->
+<div class="w-full space-y-4 mb-10">
+<!-- Row 1: Done -->
+<div class="flex items-center justify-between p-4 rounded-xl bg-white/[0.02] border border-white/[0.05]">
+<div class="flex items-center gap-4">
+<div class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></div>
+<span class="text-sm text-[#9CA3AF] font-body">Scanning LinkedIn for trending conversations...</span>
+</div>
+<span class="material-symbols-outlined text-emerald-500 text-lg" style="font-variation-settings: 'wght' 700;">done</span>
+</div>
+<!-- Row 2: Active -->
+<div class="flex items-center justify-between p-4 rounded-xl bg-white/[0.05] border border-[#E95335]/20 shadow-[inset_0_0_12px_rgba(233,83,53,0.05)]">
+<div class="flex items-center gap-4">
+<div class="w-2 h-2 rounded-full bg-[#E95335] animate-pulse shadow-[0_0_10px_rgba(233,83,53,0.8)]"></div>
+<span class="text-sm text-[#F5F5F5] font-medium font-body">Mining comments for unanswered questions...</span>
+</div>
+<div class="flex gap-1">
+<span class="w-1 h-1 bg-[#E95335] rounded-full animate-bounce"></span>
+<span class="w-1 h-1 bg-[#E95335] rounded-full animate-bounce [animation-delay:0.2s]"></span>
+<span class="w-1 h-1 bg-[#E95335] rounded-full animate-bounce [animation-delay:0.4s]"></span>
+</div>
+</div>
+<!-- Row 3: Pending -->
+<div class="flex items-center justify-between p-4 rounded-xl bg-transparent border border-white/[0.03]">
+<div class="flex items-center gap-4">
+<div class="w-2 h-2 rounded-full bg-[#353534]"></div>
+<span class="text-sm text-[#9CA3AF] font-body">Ranking angles by relevance to your ICP...</span>
+</div>
+</div>
+</div>
+<!-- Progress Bar -->
+<div class="w-full space-y-3">
+<div class="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-[#E95335] to-[#C94020] w-[64%] rounded-full shadow-[0_0_12px_rgba(233,83,53,0.4)]"></div>
+</div>
+<div class="flex justify-center">
+<span class="text-[11px] font-mono text-[#9CA3AF] tracking-tight">ESTIMATED: 45 SECONDS REMAINING</span>
+</div>
+</div>
+<!-- Keywords Recap -->
+<div class="mt-12 w-full pt-8 border-t border-white/5">
+<label class="block text-[10px] font-medium text-[#9CA3AF] tracking-[0.1em] uppercase mb-3 text-center">Researching:</label>
+<div class="flex flex-wrap justify-center gap-2">
+<div class="px-3 py-1 rounded-full bg-white/[0.05] border border-white/[0.1] text-[12px] font-mono text-[#F5F5F5]">Founder Mindset</div>
+<div class="px-3 py-1 rounded-full bg-white/[0.05] border border-white/[0.1] text-[12px] font-mono text-[#F5F5F5]">Scale Strategy</div>
+</div>
+</div>
+</section>
+<!-- Contextual Context Helper -->
+<div class="mt-12 flex items-center gap-6 opacity-40 hover:opacity-100 transition-opacity duration-500">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]" data-icon="psychology">psychology</span>
+<span class="text-[11px] uppercase tracking-wider font-medium">Deep Neural Processing</span>
+</div>
+<div class="w-1 h-1 rounded-full bg-white/20"></div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]" data-icon="cloud_sync">cloud_sync</span>
+<span class="text-[11px] uppercase tracking-wider font-medium">Live Market Sync</span>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation (Mobile Only Shell) - Hidden on this focused screen per UX logic -->
+<!-- Image placeholders with data-alt per instruction -->
+<div class="hidden">
+<!-- Visual reference for scale and spacing -->
+<img alt="UI Reference" data-alt="minimal high-end executive dashboard with dark UI, clean spacing, and subtle orange accents on dark charcoal background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNroBiQK8Wn8sXNGJUG-LQItugE0uDcH7drQIJoo6wzEEHh0js7YL1zXugXgMlJuqOnXfBJn5mII-tIzC8Zjn_4SIyPYz1Pn30EK0eNS4rxqNsKrHg7bQL7iX0DccMQKu3ueiMH7-casX5X_4HjLd0bGExAXkPf9s16LnfPNDQSopZhZnjbE8tjJTGh7OyVBFbo4rbnxSelIxeKYDPNVTeBzY_AWUysHCX5Vibok5vD0oIoZOtgYdsS_FF1oA39o9gtqMH5I2pWUw"/>
+</div>
+</body></html>

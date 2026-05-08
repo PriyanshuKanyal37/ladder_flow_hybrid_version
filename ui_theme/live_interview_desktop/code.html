@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ladder Flow | Live Interview Session</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-surface": "#e5e2e1",
+                        "primary": "#ffb4a4",
+                        "surface": "#0F0F0F",
+                        "surface-container": "#1A1A1A",
+                        "accent-orange": "#E95335",
+                        "accent-dim": "#C94020",
+                        "text-primary": "#F5F5F5",
+                        "text-secondary": "#9CA3AF",
+                    },
+                    fontFamily: {
+                        "headline": ["Inter", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"],
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #0F0F0F;
+            color: #F5F5F5;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+        }
+        .radial-mesh-glow {
+            background: radial-gradient(circle at center, rgba(233, 83, 53, 0.15) 0%, rgba(233, 83, 53, 0) 70%);
+            filter: blur(60px);
+        }
+        .waveform-bar {
+            width: 8px;
+            border-radius: 9999px;
+            transition: height 0.3s ease-in-out;
+        }
+        .waveform-glow {
+            box-shadow: 0 0 24px rgba(233, 83, 53, 0.4);
+        }
+        .transcript-gradient {
+            mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="relative h-screen w-screen selection:bg-accent-orange selection:text-white">
+<!-- Atmospheric Mesh Glow (Bottom Center) -->
+<div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] radial-mesh-glow pointer-events-none z-0"></div>
+<!-- Top App Bar (Shared Component Logic) -->
+<header class="fixed top-0 left-0 w-full h-16 glass-panel flex items-center justify-between px-8 z-50 border-t-0 border-x-0">
+<div class="flex items-center gap-4">
+<span class="text-text-secondary text-[14px] font-medium tracking-tight">Ladder Flow</span>
+</div>
+<div class="absolute left-1/2 -translate-x-1/2 flex items-center gap-3">
+<span class="font-mono text-text-secondary text-[13px] tracking-wide uppercase">Founders vs The Moat</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+<span class="font-mono text-text-primary text-[14px]">18:43</span>
+<button class="ml-4 text-text-secondary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="relative h-full w-full flex flex-col items-center justify-center pt-16 pb-32 z-10">
+<!-- Status Indicator -->
+<div class="mb-12 flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent-orange/10 border border-accent-orange/20">
+<span class="w-2 h-2 rounded-full bg-accent-orange"></span>
+<span class="text-accent-orange font-mono text-[13px] font-medium tracking-wide">Ladder Flow is speaking...</span>
+</div>
+<!-- Waveform Hero -->
+<div class="relative flex flex-col items-center">
+<!-- Active Bars -->
+<div class="flex items-end justify-center gap-2 h-[320px]">
+<!-- 32 bars with varying heights -->
+<div class="waveform-bar bg-accent-orange/20 h-[80px]"></div>
+<div class="waveform-bar bg-accent-orange/30 h-[120px]"></div>
+<div class="waveform-bar bg-accent-orange/40 h-[160px]"></div>
+<div class="waveform-bar bg-gradient-to-t from-accent-dim to-accent-orange h-[240px] waveform-glow"></div>
+<div class="waveform-bar bg-gradient-to-t from-accent-dim to-accent-orange h-[280px] waveform-glow"></div>
+<div class="waveform-bar bg-gradient-to-t from-accent-dim to-accent-orange h-[190px] waveform-glow"></div>
+<div class="waveform-bar bg-accent-orange/40 h-[140px]"></div>
+<div class="waveform-bar bg-accent-orange/20 h-[100px]"></div>
+<!-- Middle Cluster -->
+<div class="waveform-bar bg-gradient-to-t from-accent-dim to-accent-orange h-[210px] waveform-glow"></div>
+<div class="waveform-bar bg-gradient-to-t from-accent-dim to-accent-orange h-[310px] waveform-glow"></div>
+<div class="waveform-bar bg-gradient-to-t from-accent-dim to-accent-orange h-[260px] waveform-glow"></div>
+<div class="waveform-bar bg-gradient-to-t from-accent-dim to-accent-orange h-[290px] waveform-glow"></div>
+<div class="waveform-bar bg-gradient-to-t from-accent-dim to-accent-orange h-[320px] waveform-glow"></div>
+<div class="waveform-bar bg-gradient-to-t from-accent-dim to-accent-orange h-[240px] waveform-glow"></div>
+<div class="waveform-bar bg-gradient-to-t from-accent-dim to-accent-orange h-[280px] waveform-glow"></div>
+<div class="waveform-bar bg-accent-orange/40 h-[150px]"></div>
+<div class="waveform-bar bg-gradient-to-t from-accent-dim to-accent-orange h-[200px] waveform-glow"></div>
+<div class="waveform-bar bg-gradient-to-t from-accent-dim to-accent-orange h-[300px] waveform-glow"></div>
+<div class="waveform-bar bg-gradient-to-t from-accent-dim to-accent-orange h-[270px] waveform-glow"></div>
+<div class="waveform-bar bg-gradient-to-t from-accent-dim to-accent-orange h-[220px] waveform-glow"></div>
+<div class="waveform-bar bg-accent-orange/30 h-[130px]"></div>
+<div class="waveform-bar bg-accent-orange/20 h-[90px]"></div>
+<div class="waveform-bar bg-gradient-to-t from-accent-dim to-accent-orange h-[250px] waveform-glow"></div>
+<div class="waveform-bar bg-gradient-to-t from-accent-dim to-accent-orange h-[310px] waveform-glow"></div>
+<div class="waveform-bar bg-accent-orange/40 h-[160px]"></div>
+<div class="waveform-bar bg-accent-orange/20 h-[110px]"></div>
+<div class="waveform-bar bg-accent-orange/10 h-[70px]"></div>
+<div class="waveform-bar bg-accent-orange/10 h-[60px]"></div>
+<div class="waveform-bar bg-accent-orange/10 h-[50px]"></div>
+<div class="waveform-bar bg-accent-orange/10 h-[45px]"></div>
+<div class="waveform-bar bg-accent-orange/10 h-[40px]"></div>
+<div class="waveform-bar bg-accent-orange/10 h-[35px]"></div>
+</div>
+<!-- Reflections -->
+<div class="flex items-start justify-center gap-2 h-[100px] opacity-20 blur-[3px] scale-y-[-1] mt-2">
+<div class="waveform-bar bg-accent-orange h-[40px]"></div>
+<div class="waveform-bar bg-accent-orange h-[60px]"></div>
+<div class="waveform-bar bg-accent-orange h-[80px]"></div>
+<div class="waveform-bar bg-accent-orange h-[120px]"></div>
+<div class="waveform-bar bg-accent-orange h-[140px]"></div>
+<div class="waveform-bar bg-accent-orange h-[95px]"></div>
+<div class="waveform-bar bg-accent-orange h-[70px]"></div>
+<div class="waveform-bar bg-accent-orange h-[50px]"></div>
+<div class="waveform-bar bg-accent-orange h-[105px]"></div>
+<div class="waveform-bar bg-accent-orange h-[155px]"></div>
+<div class="waveform-bar bg-accent-orange h-[130px]"></div>
+<div class="waveform-bar bg-accent-orange h-[145px]"></div>
+<div class="waveform-bar bg-accent-orange h-[160px]"></div>
+<div class="waveform-bar bg-accent-orange h-[120px]"></div>
+<div class="waveform-bar bg-accent-orange h-[140px]"></div>
+<div class="waveform-bar bg-accent-orange h-[75px]"></div>
+<div class="waveform-bar bg-accent-orange h-[100px]"></div>
+<div class="waveform-bar bg-accent-orange h-[150px]"></div>
+<div class="waveform-bar bg-accent-orange h-[135px]"></div>
+<div class="waveform-bar bg-accent-orange h-[110px]"></div>
+<div class="waveform-bar bg-accent-orange h-[65px]"></div>
+<div class="waveform-bar bg-accent-orange h-[45px]"></div>
+<div class="waveform-bar bg-accent-orange h-[125px]"></div>
+<div class="waveform-bar bg-accent-orange h-[155px]"></div>
+<div class="waveform-bar bg-accent-orange h-[80px]"></div>
+<div class="waveform-bar bg-accent-orange h-[55px]"></div>
+<div class="waveform-bar bg-accent-orange h-[35px]"></div>
+<div class="waveform-bar bg-accent-orange h-[30px]"></div>
+<div class="waveform-bar bg-accent-orange h-[25px]"></div>
+<div class="waveform-bar bg-accent-orange h-[22px]"></div>
+<div class="waveform-bar bg-accent-orange h-[20px]"></div>
+<div class="waveform-bar bg-accent-orange h-[17px]"></div>
+</div>
+</div>
+</main>
+<!-- Side Navigation Drawer (Live Transcript) -->
+<aside class="fixed top-20 right-6 bottom-28 w-[35%] glass-panel rounded-xl flex flex-col z-40 overflow-hidden">
+<div class="p-6 border-b border-white/10 flex items-center justify-between">
+<h2 class="text-[11px] font-semibold text-text-secondary tracking-[0.08em] uppercase">Live Transcript</h2>
+<div class="flex gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-accent-orange"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-white/20"></span>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto p-6 space-y-8 transcript-gradient">
+<!-- AI Message -->
+<div class="space-y-2">
+<div class="flex items-center gap-2">
+<span class="font-mono text-[11px] text-accent-orange uppercase tracking-wider">Ladder Flow</span>
+<span class="text-[11px] text-text-secondary">18:41</span>
+</div>
+<p class="font-mono text-[14px] leading-relaxed text-text-primary pl-4 border-l-2 border-accent-orange/40">
+                    "When we look at the unit economics of a content moat, how do you prioritize the distribution speed versus the creative depth?"
+                </p>
+</div>
+<!-- User Message -->
+<div class="space-y-2">
+<div class="flex items-center gap-2">
+<span class="font-mono text-[11px] text-white/50 uppercase tracking-wider">Founder</span>
+<span class="text-[11px] text-text-secondary">18:42</span>
+</div>
+<p class="font-mono text-[14px] leading-relaxed text-text-secondary pl-4 border-l-2 border-white/10">
+                    "I think creative depth is the only true defensible asset left. Speed is commoditized by AI, but the 'earned secret' in the narrative is what keeps people coming back."
+                </p>
+</div>
+<!-- AI Message (Active) -->
+<div class="space-y-2">
+<div class="flex items-center gap-2">
+<span class="font-mono text-[11px] text-accent-orange uppercase tracking-wider">Ladder Flow</span>
+<span class="text-[11px] text-text-secondary">Now</span>
+</div>
+<p class="font-mono text-[14px] leading-relaxed text-text-primary pl-4 border-l-2 border-accent-orange">
+                    "That's a profound point. If we take that 'earned secret' concept further, how are you embedding those secrets into your daily voice output without leaking too much to competitors?"
+                </p>
+</div>
+</div>
+</aside>
+<!-- Bottom Navigation Bar (Control Dock) -->
+<nav class="fixed bottom-10 left-1/2 -translate-x-1/2 flex items-center justify-center z-50">
+<div class="glass-panel h-[72px] px-8 flex items-center gap-8 rounded-full shadow-2xl shadow-black/60">
+<!-- Pause -->
+<button class="w-12 h-12 flex items-center justify-center rounded-full border border-white/10 hover:bg-white/5 transition-all active:scale-95 group">
+<span class="material-symbols-outlined text-text-secondary group-hover:text-white">pause</span>
+</button>
+<!-- End Call (The Anchored Primary Action) -->
+<button class="w-16 h-16 flex items-center justify-center rounded-full bg-red-500/20 border border-red-500/40 hover:bg-red-500 transition-all active:scale-95 group shadow-lg shadow-red-500/10">
+<span class="material-symbols-outlined text-red-500 group-hover:text-white text-[28px]" style="font-variation-settings: 'FILL' 1;">call_end</span>
+</button>
+<!-- Keyboard/Input -->
+<button class="w-12 h-12 flex items-center justify-center rounded-full border border-white/10 hover:bg-white/5 transition-all active:scale-95 group">
+<span class="material-symbols-outlined text-text-secondary group-hover:text-white">keyboard</span>
+</button>
+</div>
+</nav>
+<!-- Background Elements -->
+<div class="fixed inset-0 pointer-events-none z-[-1] opacity-[0.03]" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCuwHurx5_g8PHMHsnG_vQ10zZkzavzS5EA4xlss2R_Rx5CltVXgy6fEvC-n-e6-0_U037a0RPVTfTaecSEmaLgPStSMsMQmInzqYFjZdcR5ZRMxtXsXutTI3hd1U28B-j_IfQ7Zo-7qhJB5meUMSy-paEXqRbqlkviUXGl4fYlk5xQM-XW-afrWnFwUqsg43BBYx7xKYzfamMQCHg-y8gkEznXDuhQ5toCO_U3KUi48-Pu2y7Gc-9n46hq_VXtDV47zDsxRuKft8k');"></div>
+</body></html>

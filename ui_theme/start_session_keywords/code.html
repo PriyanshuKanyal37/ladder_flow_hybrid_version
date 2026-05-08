@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ladder Flow — Start Session</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-tertiary-container": "#3e2400",
+                        "surface-bright": "#3a3939",
+                        "secondary-container": "#be0062",
+                        "tertiary-fixed": "#ffddb8",
+                        "outline-variant": "#5a413b",
+                        "primary-container": "#f85d3e",
+                        "inverse-primary": "#b22c11",
+                        "surface-container-low": "#1c1b1b",
+                        "secondary-fixed-dim": "#ffb1c7",
+                        "surface-container-highest": "#353534",
+                        "secondary-fixed": "#ffd9e2",
+                        "secondary": "#ffb1c7",
+                        "on-secondary-fixed-variant": "#8e0048",
+                        "surface-dim": "#131313",
+                        "on-background": "#e5e2e1",
+                        "tertiary-container": "#ca8100",
+                        "primary-fixed-dim": "#ffb4a4",
+                        "on-primary-fixed": "#3e0500",
+                        "error-container": "#93000a",
+                        "surface": "#131313",
+                        "on-secondary": "#650031",
+                        "on-primary-container": "#580a00",
+                        "on-secondary-fixed": "#3f001c",
+                        "surface-container-high": "#2a2a2a",
+                        "on-secondary-container": "#ffd0dc",
+                        "surface-container": "#201f1f",
+                        "on-surface": "#e5e2e1",
+                        "primary-fixed": "#ffdad3",
+                        "on-error": "#690005",
+                        "inverse-surface": "#e5e2e1",
+                        "surface-tint": "#ffb4a4",
+                        "on-primary-fixed-variant": "#8d1600",
+                        "error": "#ffb4ab",
+                        "tertiary": "#ffb95f",
+                        "on-tertiary-fixed": "#2a1700",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#653e00",
+                        "on-tertiary": "#472a00",
+                        "surface-variant": "#353534",
+                        "inverse-on-surface": "#313030",
+                        "primary": "#ffb4a4",
+                        "outline": "#a98a83",
+                        "on-surface-variant": "#e2bfb7",
+                        "on-primary": "#640d00",
+                        "tertiary-fixed-dim": "#ffb95f",
+                        "background": "#131313"
+                    },
+                    fontFamily: {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"],
+                        "mono": ["JetBrains Mono"]
+                    },
+                    borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-top: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+        }
+        .glass-input {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(4px);
+        }
+        .accent-gradient {
+            background: linear-gradient(135deg, #E95335, #C94020);
+        }
+        .bg-orb-center {
+            background: radial-gradient(circle, rgba(233, 83, 53, 0.15) 0%, rgba(233, 83, 53, 0) 70%);
+        }
+        .bg-orb-bottom-left {
+            background: radial-gradient(circle, rgba(13, 148, 136, 0.10) 0%, rgba(13, 148, 136, 0) 70%);
+        }
+        .label-style {
+            font-size: 11px;
+            font-weight: 500;
+            color: #9CA3AF;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body class="bg-[#0F0F0F] text-[#F5F5F5] font-body min-h-screen overflow-hidden flex flex-col">
+<!-- Top Navigation Bar (Shared Component) -->
+<header class="bg-[#0F0F0F] border-b border-white/5 flex justify-between items-center w-full px-6 py-4 fixed top-0 z-50">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-[#F5F5F5] hover:bg-[#242424] p-2 rounded-full transition-colors active:scale-95" data-icon="close">close</button>
+<span class="text-xl font-bold text-[#F5F5F5] font-headline">Ladder Flow</span>
+</div>
+<div class="flex items-center gap-6">
+<span class="text-[#9CA3AF] font-medium tracking-[0.08em] uppercase text-[11px] font-label">New Session</span>
+<button class="material-symbols-outlined text-[#F5F5F5] hover:bg-[#242424] p-2 rounded-full transition-colors" data-icon="help_outline">help_outline</button>
+</div>
+</header>
+<!-- Ambient Orbs Background -->
+<div class="fixed inset-0 pointer-events-none z-0">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-orb-center blur-[80px]"></div>
+<div class="absolute bottom-0 left-0 w-[350px] h-[350px] bg-orb-bottom-left blur-[60px]"></div>
+</div>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col items-center justify-center p-6 relative z-10 mt-16">
+<!-- Progress Stepper -->
+<div class="flex items-center gap-3 mb-12">
+<!-- Keywords (Active) -->
+<div class="flex items-center gap-3">
+<div class="flex items-center justify-center bg-[#E95335] text-white w-8 h-8 rounded-full text-[13px] font-semibold">1</div>
+<span class="text-[13px] font-semibold text-[#E95335]">Keywords</span>
+</div>
+<div class="w-12 h-[1px] bg-white/10"></div>
+<!-- Research -->
+<div class="flex items-center gap-3">
+<div class="flex items-center justify-center bg-[#242424] text-[#9CA3AF] w-8 h-8 rounded-full text-[13px] font-medium">2</div>
+<span class="text-[13px] font-medium text-[#9CA3AF]">Research</span>
+</div>
+<div class="w-12 h-[1px] bg-white/10"></div>
+<!-- Outline -->
+<div class="flex items-center gap-3">
+<div class="flex items-center justify-center bg-[#242424] text-[#9CA3AF] w-8 h-8 rounded-full text-[13px] font-medium">3</div>
+<span class="text-[13px] font-medium text-[#9CA3AF]">Outline</span>
+</div>
+<div class="w-12 h-[1px] bg-white/10"></div>
+<!-- Interview -->
+<div class="flex items-center gap-3">
+<div class="flex items-center justify-center bg-[#242424] text-[#9CA3AF] w-8 h-8 rounded-full text-[13px] font-medium">4</div>
+<span class="text-[13px] font-medium text-[#9CA3AF]">Interview</span>
+</div>
+</div>
+<!-- Session Creation Card -->
+<div class="glass-card w-full max-w-[580px] rounded-[20px] p-10 flex flex-col items-center text-center">
+<h2 class="text-[28px] font-bold text-[#F5F5F5] mb-2 tracking-tight">What do you want to talk about today?</h2>
+<p class="text-[#9CA3AF] text-sm mb-10 max-w-sm">Enter a few keywords or themes and we'll help you find the perfect narrative angles.</p>
+<!-- Tag Input Area -->
+<div class="w-full glass-input rounded-xl p-4 flex flex-wrap gap-2 min-h-[80px] mb-6 focus-within:ring-2 focus-within:ring-[#E95335]/20 focus-within:border-[#E95335] transition-all">
+<div class="bg-[#E95335]/10 border border-[#E95335]/30 text-[#F5F5F5] px-3 py-1.5 rounded-full text-sm font-medium flex items-center gap-2">
+                    Founder Mindset
+                    <span class="material-symbols-outlined text-[14px] cursor-pointer opacity-70 hover:opacity-100" data-icon="close">close</span>
+</div>
+<div class="bg-[#E95335]/10 border border-[#E95335]/30 text-[#F5F5F5] px-3 py-1.5 rounded-full text-sm font-medium flex items-center gap-2">
+                    Scale Strategy
+                    <span class="material-symbols-outlined text-[14px] cursor-pointer opacity-70 hover:opacity-100" data-icon="close">close</span>
+</div>
+<input class="bg-transparent border-none focus:ring-0 text-[#F5F5F5] text-sm placeholder-[#9CA3AF] flex-1 min-w-[120px]" placeholder="Add more topics..." type="text"/>
+</div>
+<!-- Suggested Chips -->
+<div class="w-full mb-10 overflow-hidden">
+<div class="flex items-center justify-between mb-3 px-1">
+<span class="label-style">Suggestions</span>
+<div class="flex gap-1">
+<button class="material-symbols-outlined text-[#9CA3AF] text-[18px] opacity-40 hover:opacity-100 transition-opacity" data-icon="chevron_left">chevron_left</button>
+<button class="material-symbols-outlined text-[#9CA3AF] text-[18px] opacity-100 hover:opacity-100 transition-opacity" data-icon="chevron_right">chevron_right</button>
+</div>
+</div>
+<div class="flex gap-2 overflow-x-auto pb-2 no-scrollbar">
+<button class="whitespace-nowrap bg-white/5 border border-white/10 text-[#F5F5F5] px-4 py-2 rounded-full text-xs font-medium hover:bg-white/10 transition-colors">B2B Sales</button>
+<button class="whitespace-nowrap bg-white/5 border border-white/10 text-[#F5F5F5] px-4 py-2 rounded-full text-xs font-medium hover:bg-white/10 transition-colors">Product-Market Fit</button>
+<button class="whitespace-nowrap bg-white/5 border border-white/10 text-[#F5F5F5] px-4 py-2 rounded-full text-xs font-medium hover:bg-white/10 transition-colors">Venture Capital</button>
+<button class="whitespace-nowrap bg-white/5 border border-white/10 text-[#F5F5F5] px-4 py-2 rounded-full text-xs font-medium hover:bg-white/10 transition-colors">Remote Culture</button>
+<button class="whitespace-nowrap bg-white/5 border border-white/10 text-[#F5F5F5] px-4 py-2 rounded-full text-xs font-medium hover:bg-white/10 transition-colors">Series A</button>
+</div>
+</div>
+<!-- CTA -->
+<button class="accent-gradient w-full h-[52px] rounded-xl text-white font-semibold flex items-center justify-center gap-2 shadow-[0_4px_16px_rgba(233,83,53,0.3)] hover:scale-[1.02] active:scale-[0.98] transition-all mb-8">
+                Find Angles
+                <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<!-- Footer Link -->
+<a class="text-[#9CA3AF] text-sm hover:text-[#F5F5F5] transition-colors flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="west">west</span>
+                Back to Dashboard
+            </a>
+</div>
+<!-- Decorative Info Badge -->
+<div class="mt-12 flex items-center gap-2 bg-[#1A1A1A] border border-white/5 rounded-full px-4 py-2">
+<div class="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></div>
+<span class="text-[12px] font-mono text-[#9CA3AF]">AI ENGINE CONNECTED — READY FOR INPUT</span>
+</div>
+</main>
+<style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</body></html>

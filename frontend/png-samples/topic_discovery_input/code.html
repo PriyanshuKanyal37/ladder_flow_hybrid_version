@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Voice2Social - Topic Discovery</title>
+<!-- Tailwind CSS with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        /* Custom scrollbar for textarea */
+        textarea::-webkit-scrollbar {
+            width: 8px;
+        }
+        textarea::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        textarea::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1;
+            border-radius: 20px;
+        }
+        .dark textarea::-webkit-scrollbar-thumb {
+            background-color: #475569;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#111318] dark:text-white transition-colors duration-200 min-h-screen flex flex-col font-display overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<header class="w-full bg-white dark:bg-[#1a2230] border-b border-[#f0f2f4] dark:border-[#2a3441] sticky top-0 z-50">
+<div class="px-4 md:px-10 py-3 flex items-center justify-between mx-auto max-w-7xl">
+<!-- Logo Section -->
+<div class="flex items-center gap-3 text-[#111318] dark:text-white">
+<div class="size-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-2xl">graphic_eq</span>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-tight">Voice2Social</h2>
+</div>
+<!-- Navigation Links (Hidden on mobile) -->
+<div class="hidden md:flex flex-1 justify-center gap-8">
+<a class="text-[#616f89] dark:text-[#9ca3af] hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Dashboard</a>
+<a class="text-primary text-sm font-bold" href="#">Content</a>
+<a class="text-[#616f89] dark:text-[#9ca3af] hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Settings</a>
+</div>
+<!-- Right Actions -->
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 text-[#616f89] dark:text-[#9ca3af] transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="size-9 rounded-full bg-gray-200 dark:bg-gray-700 bg-cover bg-center border-2 border-white dark:border-[#2a3441]" data-alt="User profile avatar showing a smiling person" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCW_syhc4B0Q3HaMHnNqSixR14h3owvQUJrl7LXuHI1Y4ulL6YhAC2ngO_tVhJ_yK2g8M1Npgc_qIX-xn7WeRQeY2YwqhwssP77wu8aaMouW3qzMsOHUEMNYcOpiiBzszh4XQNnQ-oFmZ8Sp_PZqzX0nylfMfEvYNvJAwCbeTUZkEVmvN_YxAuNk6I-TWNGYsx9DUACHQqqpVaTFTidmKC7OG22i6fvtzmiHb3KAUAcN0P0NnITFLLgfLNkLwwW5ln2wQFSrTEZ6l18");'>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Container -->
+<main class="flex-grow flex flex-col items-center justify-center px-4 py-12 relative z-10">
+<!-- Center Column / Card -->
+<div class="w-full max-w-[640px] flex flex-col gap-8 animate-fade-in-up">
+<!-- Header Section -->
+<div class="text-center space-y-4">
+<h1 class="text-[#111318] dark:text-white text-4xl md:text-5xl font-black leading-tight tracking-tight">
+                    What do you want to <br class="hidden sm:block"/>talk about today?
+                </h1>
+<p class="text-[#616f89] dark:text-[#94a3b8] text-lg font-normal">
+                    Enter 3-5 keywords separated by commas to get started.
+                </p>
+</div>
+<!-- Input Card -->
+<div class="bg-white dark:bg-[#1a2230] rounded-2xl shadow-xl shadow-gray-200/50 dark:shadow-black/20 p-2 md:p-3 border border-gray-100 dark:border-gray-800">
+<div class="relative w-full">
+<label class="sr-only" for="topic-input">Topic Keywords</label>
+<div class="absolute top-5 left-5 text-primary pointer-events-none">
+<span class="material-symbols-outlined">edit_note</span>
+</div>
+<textarea autofocus="" class="w-full min-h-[200px] bg-transparent border-0 rounded-xl p-5 pl-14 text-lg md:text-xl text-[#111318] dark:text-white placeholder:text-[#94a3b8] dark:placeholder:text-[#64748b] focus:ring-0 resize-none leading-relaxed" id="topic-input" placeholder="e.g. AI automation, No-code, Remote work culture..."></textarea>
+<!-- Bottom Helper in Input -->
+<div class="px-5 pb-3 flex justify-between items-center border-t border-gray-100 dark:border-gray-800 pt-3 mt-2">
+<span class="text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider">Keywords</span>
+<div class="flex gap-2">
+<span class="px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded text-xs text-gray-500 dark:text-gray-400 font-medium">Comma separated</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Area -->
+<div class="flex flex-col gap-4 items-center w-full">
+<button class="group relative w-full bg-primary hover:bg-blue-700 active:bg-blue-800 text-white font-bold text-lg h-14 rounded-xl shadow-lg shadow-primary/30 transition-all duration-200 transform hover:-translate-y-0.5 flex items-center justify-center gap-2 overflow-hidden">
+<span class="relative z-10">Discover Trending Topics</span>
+<span class="material-symbols-outlined relative z-10 transition-transform group-hover:translate-x-1">arrow_forward</span>
+<!-- Subtle shine effect -->
+<div class="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/20 to-transparent z-0"></div>
+</button>
+<div class="flex items-center gap-2 text-[#616f89] dark:text-[#64748b] text-sm">
+<span class="material-symbols-outlined text-[18px]">auto_awesome</span>
+<p>We'll analyze conversations to generate unique ideas.</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Background Decor (Optional Gradient Blob) -->
+<div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 dark:bg-primary/10 rounded-full blur-[100px] -z-10 pointer-events-none"></div>
+</body></html>

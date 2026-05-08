@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Voice2Content Dashboard</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for minimalist feel */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #334155;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display antialiased overflow-hidden">
+<div class="flex h-screen w-full">
+<!-- Sidebar -->
+<aside class="hidden md:flex flex-col w-64 h-full bg-[#F7F7F8] dark:bg-[#151c2a] border-r border-slate-200 dark:border-slate-800">
+<!-- Logo Area -->
+<div class="p-6 flex items-center gap-3">
+<div class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary text-white">
+<span class="material-symbols-outlined text-[20px]">graphic_eq</span>
+</div>
+<h1 class="text-base font-bold tracking-tight text-slate-900 dark:text-white">Voice2Content</h1>
+</div>
+<!-- Navigation -->
+<nav class="flex-1 px-3 py-2 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-white dark:bg-slate-800 shadow-sm border border-slate-200/50 dark:border-slate-700/50 group transition-all" href="#">
+<span class="material-symbols-outlined text-[20px] text-primary">dashboard</span>
+<span class="text-sm font-medium text-slate-900 dark:text-white">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px] text-slate-500 group-hover:text-slate-700 dark:text-slate-400 dark:group-hover:text-slate-200">folder_open</span>
+<span class="text-sm font-medium text-slate-600 group-hover:text-slate-900 dark:text-slate-400 dark:group-hover:text-slate-200">Sessions</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px] text-slate-500 group-hover:text-slate-700 dark:text-slate-400 dark:group-hover:text-slate-200">auto_awesome</span>
+<span class="text-sm font-medium text-slate-600 group-hover:text-slate-900 dark:text-slate-400 dark:group-hover:text-slate-200">Templates</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px] text-slate-500 group-hover:text-slate-700 dark:text-slate-400 dark:group-hover:text-slate-200">settings</span>
+<span class="text-sm font-medium text-slate-600 group-hover:text-slate-900 dark:text-slate-400 dark:group-hover:text-slate-200">Settings</span>
+</a>
+</nav>
+<!-- User Profile Snippet -->
+<div class="p-4 border-t border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-cover bg-center" data-alt="User profile picture" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCU8S0HBe-JwOmhxDEak5hpwG3yWizx7gsk1fNOD46-bcjDnsduhRM7-NvwK1yjR1LqP4t8M4ykaQBXi8OS3V9Y32EvkXQ3sLbtbR3OenFWWuJzQGNJqwtPZjxyAb5piXwivB_LGIm2QRDOfCZGFzyRW6hBibyEdvA5CezfAR7VvVu4Tj1nHWEGvaaEnjBOvk1Ve-JbcuQ9ra-SDAtJbx6Zrz7Cj6nj3rTglUiUr6wc47lTNXma6oxQIogrXypP0RNvN5XdUlT5yEC2');"></div>
+<div class="flex flex-col">
+<p class="text-xs font-semibold text-slate-900 dark:text-white">Alex Creator</p>
+<p class="text-[10px] text-slate-500 dark:text-slate-400">Pro Plan</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col h-full overflow-y-auto bg-white dark:bg-background-dark">
+<div class="max-w-[1200px] w-full mx-auto p-6 md:p-10 flex flex-col gap-8">
+<!-- Page Header -->
+<div class="flex flex-wrap justify-between items-end gap-4">
+<div class="flex flex-col gap-1">
+<h2 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Dashboard</h2>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Welcome back. You have 3 pending drafts.</p>
+</div>
+<!-- Mobile Menu Button (Visible only on small screens) -->
+<button class="md:hidden p-2 text-slate-500 hover:text-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+<!-- Hero Card -->
+<div class="relative overflow-hidden rounded-2xl bg-slate-50 dark:bg-[#1e2736] border border-slate-100 dark:border-slate-800 p-1">
+<div class="flex flex-col md:flex-row items-center">
+<!-- Content -->
+<div class="p-8 flex flex-col justify-center items-start gap-4 flex-1 z-10">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold">
+<span class="material-symbols-outlined text-[16px]">mic</span>
+<span>Voice AI 2.0</span>
+</div>
+<h3 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white leading-tight">Create New Content Session</h3>
+<p class="text-slate-600 dark:text-slate-300 text-base max-w-md">Turn your voice conversations into high-performing social media content, blog posts, and newsletters instantly.</p>
+<button class="mt-2 flex items-center gap-2 bg-primary hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-all shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                                New Session
+                            </button>
+</div>
+<!-- Decorative Image Area -->
+<div class="w-full md:w-1/2 h-48 md:h-72 relative">
+<!-- Abstract Gradient Background -->
+<div class="absolute inset-0 bg-gradient-to-br from-blue-100 to-indigo-50 dark:from-slate-800 dark:to-slate-900"></div>
+<!-- Illustration Image -->
+<div class="absolute inset-4 rounded-xl bg-cover bg-center shadow-sm border border-white/20" data-alt="Abstract sound waves visualization on a dark screen" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD2RLKn-WG0HYbhCZONBlmXafAvKfvD7bUhnlWWLkbTX-6MDhOffFKo6XsEDR1_X1WVo8u9fp2Sa-Brw-JVQuUFKE9uVxIDG1qSIna6r4g9IySM3hgksZEb_Z0SXWIfqygGKH-3OxpJeTLluyT2NhAuhD5qe1UrQF9Ep3h094JmVtq0YEynVTBDa_Z16aLC8L1T1wtMtcCXqlwrUScqEdmt-qbfQUxw_UTA6c4XFT8Qazku_lmGrt3H7y6xyTLOteEsRW6MchvoxvfH');">
+</div>
+</div>
+</div>
+</div>
+<!-- Past Sessions Section -->
+<div class="flex flex-col gap-4">
+<!-- Controls Header -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">Recent Sessions</h3>
+<!-- Search Bar -->
+<div class="relative group w-full sm:w-72">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-slate-400 group-focus-within:text-primary transition-colors text-[20px]">search</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-2 border border-slate-200 dark:border-slate-700 rounded-lg leading-5 bg-white dark:bg-[#1e2736] text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm transition-all shadow-sm" placeholder="Search by title or keyword..." type="text"/>
+</div>
+</div>
+<!-- List Container -->
+<div class="bg-white dark:bg-[#1e2736] border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
+<!-- Header Row (Hidden on mobile for cleaner look, usually) -->
+<div class="hidden md:grid grid-cols-12 gap-4 px-6 py-3 bg-slate-50 dark:bg-slate-800/50 border-b border-slate-100 dark:border-slate-700 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+<div class="col-span-6">Session Title</div>
+<div class="col-span-3">Tags</div>
+<div class="col-span-3 text-right">Actions</div>
+</div>
+<!-- Rows -->
+<div class="divide-y divide-slate-100 dark:divide-slate-800">
+<!-- Item 1 -->
+<div class="group relative grid grid-cols-1 md:grid-cols-12 gap-4 px-6 py-4 items-center hover:bg-[#F7F7F8] dark:hover:bg-slate-800/30 transition-colors cursor-pointer">
+<div class="col-span-6 flex items-center gap-4">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-indigo-50 dark:bg-indigo-900/20 flex items-center justify-center text-indigo-600 dark:text-indigo-400">
+<span class="material-symbols-outlined">mic</span>
+</div>
+<div class="min-w-0">
+<p class="text-sm font-semibold text-slate-900 dark:text-white truncate group-hover:text-primary transition-colors">Podcast Ep 42: Future of AI</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Oct 24, 2023 • 45 mins</p>
+</div>
+</div>
+<div class="col-span-3 flex items-center gap-2 flex-wrap">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-purple-50 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300 border border-purple-100 dark:border-purple-800">AI</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 border border-blue-100 dark:border-blue-800">Tech</span>
+</div>
+<div class="col-span-3 flex items-center justify-end gap-2 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-xs font-medium text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-white px-3 py-1.5 rounded-md hover:bg-white dark:hover:bg-slate-700 border border-transparent hover:border-slate-200 dark:hover:border-slate-600 transition-all shadow-sm">View Content</button>
+<button class="p-1.5 text-slate-400 hover:text-primary rounded-md hover:bg-white dark:hover:bg-slate-700 transition-colors" title="Duplicate">
+<span class="material-symbols-outlined text-[20px]">content_copy</span>
+</button>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="group relative grid grid-cols-1 md:grid-cols-12 gap-4 px-6 py-4 items-center hover:bg-[#F7F7F8] dark:hover:bg-slate-800/30 transition-colors cursor-pointer">
+<div class="col-span-6 flex items-center gap-4">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-50 dark:bg-emerald-900/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
+<span class="material-symbols-outlined">lightbulb</span>
+</div>
+<div class="min-w-0">
+<p class="text-sm font-semibold text-slate-900 dark:text-white truncate group-hover:text-primary transition-colors">Marketing Q4 Brainstorm</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Oct 22, 2023 • 1 hour 12 mins</p>
+</div>
+</div>
+<div class="col-span-3 flex items-center gap-2 flex-wrap">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300 border border-emerald-100 dark:border-emerald-800">Strategy</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-300 border border-gray-200 dark:border-gray-700">Internal</span>
+</div>
+<div class="col-span-3 flex items-center justify-end gap-2 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-xs font-medium text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-white px-3 py-1.5 rounded-md hover:bg-white dark:hover:bg-slate-700 border border-transparent hover:border-slate-200 dark:hover:border-slate-600 transition-all shadow-sm">View Content</button>
+<button class="p-1.5 text-slate-400 hover:text-primary rounded-md hover:bg-white dark:hover:bg-slate-700 transition-colors" title="Duplicate">
+<span class="material-symbols-outlined text-[20px]">content_copy</span>
+</button>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="group relative grid grid-cols-1 md:grid-cols-12 gap-4 px-6 py-4 items-center hover:bg-[#F7F7F8] dark:hover:bg-slate-800/30 transition-colors cursor-pointer">
+<div class="col-span-6 flex items-center gap-4">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-orange-50 dark:bg-orange-900/20 flex items-center justify-center text-orange-600 dark:text-orange-400">
+<span class="material-symbols-outlined">coffee</span>
+</div>
+<div class="min-w-0">
+<p class="text-sm font-semibold text-slate-900 dark:text-white truncate group-hover:text-primary transition-colors">Client Interview: Sarah Jenkins</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Oct 20, 2023 • 25 mins</p>
+</div>
+</div>
+<div class="col-span-3 flex items-center gap-2 flex-wrap">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-300 border border-gray-200 dark:border-gray-700">Client</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-orange-50 text-orange-700 dark:bg-orange-900/30 dark:text-orange-300 border border-orange-100 dark:border-orange-800">Feedback</span>
+</div>
+<div class="col-span-3 flex items-center justify-end gap-2 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-xs font-medium text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-white px-3 py-1.5 rounded-md hover:bg-white dark:hover:bg-slate-700 border border-transparent hover:border-slate-200 dark:hover:border-slate-600 transition-all shadow-sm">View Content</button>
+<button class="p-1.5 text-slate-400 hover:text-primary rounded-md hover:bg-white dark:hover:bg-slate-700 transition-colors" title="Duplicate">
+<span class="material-symbols-outlined text-[20px]">content_copy</span>
+</button>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="group relative grid grid-cols-1 md:grid-cols-12 gap-4 px-6 py-4 items-center hover:bg-[#F7F7F8] dark:hover:bg-slate-800/30 transition-colors cursor-pointer">
+<div class="col-span-6 flex items-center gap-4">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-pink-50 dark:bg-pink-900/20 flex items-center justify-center text-pink-600 dark:text-pink-400">
+<span class="material-symbols-outlined">campaign</span>
+</div>
+<div class="min-w-0">
+<p class="text-sm font-semibold text-slate-900 dark:text-white truncate group-hover:text-primary transition-colors">Product Launch Announcement</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Oct 18, 2023 • 15 mins</p>
+</div>
+</div>
+<div class="col-span-3 flex items-center gap-2 flex-wrap">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-pink-50 text-pink-700 dark:bg-pink-900/30 dark:text-pink-300 border border-pink-100 dark:border-pink-800">Social</span>
+</div>
+<div class="col-span-3 flex items-center justify-end gap-2 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-xs font-medium text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-white px-3 py-1.5 rounded-md hover:bg-white dark:hover:bg-slate-700 border border-transparent hover:border-slate-200 dark:hover:border-slate-600 transition-all shadow-sm">View Content</button>
+<button class="p-1.5 text-slate-400 hover:text-primary rounded-md hover:bg-white dark:hover:bg-slate-700 transition-colors" title="Duplicate">
+<span class="material-symbols-outlined text-[20px]">content_copy</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="flex justify-center pt-4">
+<button class="text-sm font-medium text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200 transition-colors">Load more sessions</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login | Ladder Flow</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-bright": "#3a3939",
+                        "tertiary-container": "#ca8100",
+                        "secondary-fixed-dim": "#ffb1c7",
+                        "surface-container-highest": "#353534",
+                        "secondary": "#ffb1c7",
+                        "on-surface-variant": "#e2bfb7",
+                        "inverse-primary": "#b22c11",
+                        "on-secondary-fixed-variant": "#8e0048",
+                        "on-primary-container": "#580a00",
+                        "surface": "#131313",
+                        "tertiary-fixed-dim": "#ffb95f",
+                        "surface-tint": "#ffb4a4",
+                        "surface-container-lowest": "#0e0e0e",
+                        "inverse-on-surface": "#313030",
+                        "secondary-container": "#be0062",
+                        "secondary-fixed": "#ffd9e2",
+                        "error-container": "#93000a",
+                        "on-error": "#690005",
+                        "tertiary": "#ffb95f",
+                        "surface-container-high": "#2a2a2a",
+                        "on-primary": "#640d00",
+                        "on-background": "#e5e2e1",
+                        "primary": "#ffb4a4",
+                        "on-secondary": "#650031",
+                        "inverse-surface": "#e5e2e1",
+                        "surface-dim": "#131313",
+                        "on-tertiary": "#472a00",
+                        "on-tertiary-container": "#3e2400",
+                        "surface-variant": "#353534",
+                        "on-tertiary-fixed-variant": "#653e00",
+                        "on-secondary-fixed": "#3f001c",
+                        "surface-container": "#201f1f",
+                        "on-surface": "#e5e2e1",
+                        "on-primary-fixed-variant": "#8d1600",
+                        "surface-container-low": "#1c1b1b",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-fixed": "#ffddb8",
+                        "on-primary-fixed": "#3e0500",
+                        "on-secondary-container": "#ffd0dc",
+                        "background": "#131313",
+                        "error": "#ffb4ab",
+                        "primary-fixed-dim": "#ffb4a4",
+                        "outline": "#a98a83",
+                        "outline-variant": "#5a413b",
+                        "on-tertiary-fixed": "#2a1700",
+                        "primary-fixed": "#ffdad3",
+                        "primary-container": "#f85d3e"
+                    },
+                    fontFamily: {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"],
+                        "mono": ["JetBrains Mono"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "10px",
+                        "xl": "14px",
+                        "2xl": "20px",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(24px);
+            border-top: 1px solid rgba(255, 255, 255, 0.14);
+            border-left: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .form-glass {
+            background: rgba(26, 26, 26, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.50);
+        }
+        .accent-gradient {
+            background: linear-gradient(135deg, #E95335, #C94020);
+        }
+        .waveform-bar {
+            background-color: #E95335;
+            box-shadow: 0 0 12px rgba(233, 83, 53, 0.50);
+        }
+        .ambient-glow {
+            background: radial-gradient(circle at center, rgba(233, 83, 53, 0.15) 0%, transparent 70%);
+        }
+    </style>
+</head>
+<body class="bg-[#0F0F0F] text-[#F5F5F5] font-['Inter'] min-h-screen selection:bg-[#E95335]/30">
+<!-- Top Navigation Bar (Shared Component) -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-8 py-6 w-full bg-transparent">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#E95335] text-2xl" data-icon="mic">mic</span>
+<span class="text-xl font-bold tracking-tight text-[#F5F5F5]">Ladder Flow</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-[#9CA3AF] hover:text-[#F5F5F5] transition-colors duration-200">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+<button class="text-[#9CA3AF] hover:text-[#F5F5F5] transition-colors duration-200">
+<span class="material-symbols-outlined" data-icon="info">info</span>
+</button>
+</div>
+</header>
+<main class="flex min-h-screen flex-col md:flex-row">
+<!-- Left Panel: Branding & Proof (45%) -->
+<section class="hidden md:flex md:w-[45%] flex-col justify-between p-12 lg:p-24 relative overflow-hidden bg-[#0F0F0F]">
+<!-- Ambient Glow -->
+<div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] ambient-glow pointer-events-none"></div>
+<div class="mt-20 z-10">
+<h1 class="text-4xl lg:text-6xl font-bold leading-tight tracking-tight mb-12 max-w-lg">
+                    Speak your expertise.<br/>
+<span class="text-[#E95335]">We write the content.</span>
+</h1>
+<div class="grid gap-4 max-w-sm">
+<div class="glass-panel p-4 rounded-xl flex items-center gap-4">
+<span class="text-2xl">🎙️</span>
+<div>
+<p class="text-sm font-semibold">2,400+ founders</p>
+<p class="text-[11px] uppercase tracking-wider text-[#9CA3AF]">Scaling their voice</p>
+</div>
+</div>
+<div class="glass-panel p-4 rounded-xl flex items-center gap-4">
+<span class="text-2xl">📝</span>
+<div>
+<p class="text-sm font-semibold">18,000+ posts</p>
+<p class="text-[11px] uppercase tracking-wider text-[#9CA3AF]">High-intent output</p>
+</div>
+</div>
+<div class="glass-panel p-4 rounded-xl flex items-center gap-4">
+<span class="text-2xl">🧠</span>
+<div>
+<p class="text-sm font-semibold">4.8M signals</p>
+<p class="text-[11px] uppercase tracking-wider text-[#9CA3AF]">Learned expertise</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Waveform Decoration -->
+<div class="flex items-end gap-2 h-32 z-10">
+<div class="waveform-bar w-2 rounded-full" style="height: 40%;"></div>
+<div class="waveform-bar w-2 rounded-full" style="height: 65%;"></div>
+<div class="waveform-bar w-2 rounded-full" style="height: 45%;"></div>
+<div class="waveform-bar w-2 rounded-full" style="height: 90%;"></div>
+<div class="waveform-bar w-2 rounded-full" style="height: 70%;"></div>
+<div class="waveform-bar w-2 rounded-full" style="height: 55%;"></div>
+<div class="waveform-bar w-2 rounded-full" style="height: 85%;"></div>
+<div class="waveform-bar w-2 rounded-full" style="height: 40%;"></div>
+<div class="waveform-bar w-2 rounded-full" style="height: 60%;"></div>
+<div class="waveform-bar w-2 rounded-full" style="height: 75%;"></div>
+<div class="waveform-bar w-2 rounded-full" style="height: 50%;"></div>
+<div class="waveform-bar w-2 rounded-full" style="height: 30%;"></div>
+</div>
+</section>
+<!-- Right Panel: Login Form (55%) -->
+<section class="flex-1 flex items-center justify-center p-6 lg:p-12 relative">
+<!-- Background Image (Optional/Subtle) -->
+<div class="absolute inset-0 z-0 opacity-20">
+<div class="w-full h-full bg-[#0F0F0F]" data-alt="minimalist studio background with soft orange light leaking from the corners dark professional aesthetic"></div>
+</div>
+<!-- Form Card -->
+<div class="form-glass w-full max-w-md p-8 lg:p-12 rounded-2xl z-10">
+<!-- Mobile Branding -->
+<div class="md:hidden flex flex-col items-center mb-8">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-[#E95335] text-3xl" data-icon="mic">mic</span>
+<span class="text-2xl font-bold tracking-tight">Ladder Flow</span>
+</div>
+<h2 class="text-xl font-bold text-center">Speak your expertise.</h2>
+</div>
+<div class="mb-8">
+<h2 class="text-2xl lg:text-3xl font-bold mb-2">Welcome back</h2>
+<p class="text-[#9CA3AF] text-sm">Continue building your personal brand</p>
+</div>
+<div class="space-y-6">
+<!-- Google SSO -->
+<button class="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-lg border border-white/10 hover:bg-[#242424] transition-all duration-200 group">
+<svg class="w-5 h-5" viewbox="0 0 24 24">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path>
+</svg>
+<span class="text-sm font-medium">Continue with Google</span>
+</button>
+<div class="relative py-4">
+<div class="absolute inset-0 flex items-center"><div class="w-full border-t border-white/5"></div></div>
+<div class="relative flex justify-center text-xs uppercase tracking-widest text-[#9CA3AF]">
+<span class="bg-[#1A1A1A] px-4">Or use email</span>
+</div>
+</div>
+<!-- Input Fields -->
+<div class="space-y-4">
+<div>
+<label class="text-[11px] font-medium tracking-[0.08em] uppercase text-[#9CA3AF] mb-2 block">Email Address</label>
+<input class="w-full bg-[#0F0F0F] border border-white/10 rounded-lg py-3 px-4 text-[#F5F5F5] placeholder-[#9CA3AF] focus:border-[#E95335] focus:ring-1 focus:ring-[#E95335] transition-all outline-none" placeholder="executive@founder.com" type="email"/>
+</div>
+<div>
+<div class="flex justify-between items-center mb-2">
+<label class="text-[11px] font-medium tracking-[0.08em] uppercase text-[#9CA3AF]">Password</label>
+<button class="text-[#E95335] text-xs font-medium hover:underline transition-all">Forgot password?</button>
+</div>
+<div class="relative">
+<input class="w-full bg-[#0F0F0F] border border-white/10 rounded-lg py-3 px-4 text-[#F5F5F5] placeholder-[#9CA3AF] focus:border-[#E95335] focus:ring-1 focus:ring-[#E95335] transition-all outline-none" placeholder="••••••••" type="password"/>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 text-[#9CA3AF] hover:text-[#F5F5F5]">
+<span class="material-symbols-outlined text-xl" data-icon="visibility">visibility</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Sign In Button -->
+<button class="w-full h-[52px] accent-gradient text-white font-semibold rounded-xl shadow-[0_4px_16px_rgba(233,83,53,0.30)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-200">
+                        Sign In
+                    </button>
+<div class="text-center mt-8">
+<a class="text-sm text-[#9CA3AF] hover:text-[#E95335] transition-colors" href="#">
+                            Don't have an account? <span class="font-semibold">Sign up free →</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="fixed bottom-0 w-full z-40 bg-transparent flex justify-center items-center gap-6 px-8 py-4 w-full">
+<span class="text-[11px] font-medium tracking-[0.08em] uppercase text-[#9CA3AF]">© 2024 Ladder Flow. Built for Executives.</span>
+<div class="flex gap-6">
+<a class="text-[11px] font-medium tracking-[0.08em] uppercase text-[#9CA3AF] hover:text-[#F5F5F5] transition-colors duration-200 opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
+<a class="text-[11px] font-medium tracking-[0.08em] uppercase text-[#9CA3AF] hover:text-[#F5F5F5] transition-colors duration-200 opacity-80 hover:opacity-100" href="#">Terms of Service</a>
+<a class="text-[11px] font-medium tracking-[0.08em] uppercase text-[#9CA3AF] hover:text-[#F5F5F5] transition-colors duration-200 opacity-80 hover:opacity-100" href="#">Support</a>
+</div>
+</footer>
+</body></html>

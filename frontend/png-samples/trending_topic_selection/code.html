@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VoiceViral - Trending Topics</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    boxShadow: {
+                        'glow': '0 0 20px rgba(19, 91, 236, 0.15)',
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar to look cleaner */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white antialiased selection:bg-primary/20 selection:text-primary">
+<div class="relative flex min-h-screen flex-col pb-24"> <!-- pb-24 to account for sticky footer -->
+<!-- Navbar -->
+<header class="sticky top-0 z-40 w-full border-b border-slate-200 bg-white/80 px-4 py-3 backdrop-blur-md dark:border-slate-800 dark:bg-background-dark/80 lg:px-10">
+<div class="mx-auto flex max-w-7xl items-center justify-between">
+<div class="flex items-center gap-4 text-slate-900 dark:text-white">
+<div class="flex size-8 items-center justify-center rounded-lg bg-primary text-white">
+<span class="material-symbols-outlined">graphic_eq</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight">VoiceViral</h2>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-400 dark:hover:text-primary" href="#">Dashboard</a>
+<a class="text-sm font-medium text-primary" href="#">Trending</a>
+<a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-400 dark:hover:text-primary" href="#">My Scripts</a>
+<a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-400 dark:hover:text-primary" href="#">Analytics</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="flex size-10 items-center justify-center rounded-full text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="size-10 rounded-full bg-cover bg-center ring-2 ring-slate-100 dark:ring-slate-800" data-alt="User profile picture placeholder" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAlFkjxJSVQ3m4jOUoJRe4vS2VB_69qpNmqiY7VnZ6fKjII75zBJJM30VB9eH3nex_GimNxrBtcQx91bQpgC0MW2U3HexvifzmA5plotu2wZm0I1dM5CN0W5mJ1daks6Vs8iVtpeZoYSiINYMq3H-uuZFvXP9SFyesDta8m8S6vGCdRZ8HhoCrdvrhmKYWVYk16189H0wefZ-HAsjb5CFiggal7l7nk4C1D_Ssq4saJMMpqoIMkGCrRqlVwS4mTjg8Ex99iMzDXcam6");'>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 px-4 py-8 lg:px-8">
+<div class="mx-auto max-w-5xl flex flex-col gap-8">
+<!-- Page Header & Search -->
+<div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+<div class="flex flex-col gap-2 max-w-xl">
+<h1 class="text-3xl font-black tracking-tight text-slate-900 dark:text-white sm:text-4xl">Trending Topics</h1>
+<p class="text-slate-500 dark:text-slate-400 text-lg">Select high-performing topics to generate your next viral interview script.</p>
+</div>
+<div class="w-full md:w-auto md:min-w-[320px]">
+<div class="relative group">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary">
+<span class="material-symbols-outlined">search</span>
+</span>
+<input class="w-full rounded-xl border-slate-200 bg-white py-3 pl-10 pr-4 text-sm font-medium shadow-sm transition-all focus:border-primary focus:ring-4 focus:ring-primary/10 dark:border-slate-700 dark:bg-slate-800 dark:text-white dark:placeholder-slate-500" placeholder="Search keywords or hashtags..." type="text"/>
+</div>
+</div>
+</div>
+<!-- Chips Filter -->
+<div class="flex flex-wrap gap-2">
+<button class="inline-flex h-9 items-center rounded-full bg-slate-900 px-4 text-sm font-medium text-white shadow-md transition-transform hover:-translate-y-0.5 dark:bg-white dark:text-slate-900">
+                        All
+                    </button>
+<button class="inline-flex h-9 items-center rounded-full border border-slate-200 bg-white px-4 text-sm font-medium text-slate-600 shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary hover:text-primary dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:border-primary">
+                        Technology
+                    </button>
+<button class="inline-flex h-9 items-center rounded-full border border-slate-200 bg-white px-4 text-sm font-medium text-slate-600 shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary hover:text-primary dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:border-primary">
+                        Business
+                    </button>
+<button class="inline-flex h-9 items-center rounded-full border border-slate-200 bg-white px-4 text-sm font-medium text-slate-600 shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary hover:text-primary dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:border-primary">
+                        Health &amp; Wellness
+                    </button>
+<button class="inline-flex h-9 items-center rounded-full border border-slate-200 bg-white px-4 text-sm font-medium text-slate-600 shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary hover:text-primary dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:border-primary">
+                        Marketing
+                    </button>
+<button class="inline-flex h-9 items-center rounded-full border border-slate-200 bg-white px-4 text-sm font-medium text-slate-600 shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary hover:text-primary dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:border-primary">
+                        Crypto
+                    </button>
+</div>
+<!-- Topics Grid -->
+<div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+<!-- Card 1: Selected State -->
+<div class="group relative flex cursor-pointer flex-col rounded-xl border-2 border-primary bg-white p-6 shadow-glow transition-all hover:-translate-y-1 dark:bg-slate-800 dark:border-primary">
+<div class="absolute right-4 top-4">
+<div class="flex size-6 items-center justify-center rounded-full bg-primary text-white shadow-sm">
+<span class="material-symbols-outlined text-[18px] font-bold">check</span>
+</div>
+</div>
+<div class="mb-4 flex items-center gap-3">
+<div class="flex size-10 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400">
+<span class="material-symbols-outlined filled">work</span>
+</div>
+<span class="inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-xs font-medium text-indigo-700 ring-1 ring-inset ring-indigo-700/10 dark:bg-indigo-900/30 dark:text-indigo-400">#Productivity</span>
+</div>
+<h3 class="mb-2 text-xl font-bold leading-tight text-slate-900 dark:text-white">The Future of Remote Work</h3>
+<p class="mb-6 line-clamp-2 text-sm text-slate-500 dark:text-slate-400">Exploring how hybrid models are reshaping corporate culture and employee satisfaction in 2024.</p>
+<div class="mt-auto flex items-center gap-6 border-t border-slate-100 pt-4 dark:border-slate-700">
+<div class="flex items-center gap-1.5 text-sm font-semibold text-slate-700 dark:text-slate-300">
+<span class="material-symbols-outlined text-rose-500 text-[18px] filled">favorite</span>
+                                12.5k
+                            </div>
+<div class="flex items-center gap-1.5 text-sm font-semibold text-slate-700 dark:text-slate-300">
+<span class="material-symbols-outlined text-blue-500 text-[18px] filled">chat_bubble</span>
+                                840
+                            </div>
+<div class="flex items-center gap-1.5 text-sm font-semibold text-slate-700 dark:text-slate-300">
+<span class="material-symbols-outlined text-green-500 text-[18px]">share</span>
+                                3.2k
+                            </div>
+<div class="ml-auto flex items-center gap-1 text-xs font-medium text-emerald-600 dark:text-emerald-400">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+                                +12% this week
+                            </div>
+</div>
+</div>
+<!-- Card 2: Unselected State -->
+<div class="group relative flex cursor-pointer flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-primary/50 hover:shadow-md dark:border-slate-700 dark:bg-slate-800 dark:hover:border-primary/50">
+<div class="absolute right-4 top-4">
+<div class="flex size-6 items-center justify-center rounded-full border-2 border-slate-300 bg-transparent transition-colors group-hover:border-primary dark:border-slate-600">
+</div>
+</div>
+<div class="mb-4 flex items-center gap-3">
+<div class="flex size-10 items-center justify-center rounded-lg bg-teal-50 text-teal-600 dark:bg-teal-900/30 dark:text-teal-400">
+<span class="material-symbols-outlined filled">smart_toy</span>
+</div>
+<span class="inline-flex items-center rounded-md bg-teal-50 px-2 py-1 text-xs font-medium text-teal-700 ring-1 ring-inset ring-teal-700/10 dark:bg-teal-900/30 dark:text-teal-400">#AI</span>
+</div>
+<h3 class="mb-2 text-xl font-bold leading-tight text-slate-900 dark:text-white">Generative AI in Marketing</h3>
+<p class="mb-6 line-clamp-2 text-sm text-slate-500 dark:text-slate-400">How AI tools are automating content creation and what it means for human creativity.</p>
+<div class="mt-auto flex items-center gap-6 border-t border-slate-100 pt-4 dark:border-slate-700">
+<div class="flex items-center gap-1.5 text-sm font-semibold text-slate-700 dark:text-slate-300">
+<span class="material-symbols-outlined text-slate-400 text-[18px]">favorite</span>
+                                8.2k
+                            </div>
+<div class="flex items-center gap-1.5 text-sm font-semibold text-slate-700 dark:text-slate-300">
+<span class="material-symbols-outlined text-slate-400 text-[18px]">chat_bubble</span>
+                                410
+                            </div>
+<div class="flex items-center gap-1.5 text-sm font-semibold text-slate-700 dark:text-slate-300">
+<span class="material-symbols-outlined text-slate-400 text-[18px]">share</span>
+                                1.5k
+                            </div>
+</div>
+</div>
+<!-- Card 3: Unselected State -->
+<div class="group relative flex cursor-pointer flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-primary/50 hover:shadow-md dark:border-slate-700 dark:bg-slate-800 dark:hover:border-primary/50">
+<div class="absolute right-4 top-4">
+<div class="flex size-6 items-center justify-center rounded-full border-2 border-slate-300 bg-transparent transition-colors group-hover:border-primary dark:border-slate-600">
+</div>
+</div>
+<div class="mb-4 flex items-center gap-3">
+<div class="flex size-10 items-center justify-center rounded-lg bg-green-50 text-green-600 dark:bg-green-900/30 dark:text-green-400">
+<span class="material-symbols-outlined filled">eco</span>
+</div>
+<span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-700/10 dark:bg-green-900/30 dark:text-green-400">#Sustainability</span>
+</div>
+<h3 class="mb-2 text-xl font-bold leading-tight text-slate-900 dark:text-white">Sustainable Living Habits</h3>
+<p class="mb-6 line-clamp-2 text-sm text-slate-500 dark:text-slate-400">Simple changes in daily routine that have a massive impact on carbon footprint.</p>
+<div class="mt-auto flex items-center gap-6 border-t border-slate-100 pt-4 dark:border-slate-700">
+<div class="flex items-center gap-1.5 text-sm font-semibold text-slate-700 dark:text-slate-300">
+<span class="material-symbols-outlined text-slate-400 text-[18px]">favorite</span>
+                                5.6k
+                            </div>
+<div class="flex items-center gap-1.5 text-sm font-semibold text-slate-700 dark:text-slate-300">
+<span class="material-symbols-outlined text-slate-400 text-[18px]">chat_bubble</span>
+                                230
+                            </div>
+<div class="flex items-center gap-1.5 text-sm font-semibold text-slate-700 dark:text-slate-300">
+<span class="material-symbols-outlined text-slate-400 text-[18px]">share</span>
+                                800
+                            </div>
+</div>
+</div>
+<!-- Card 4: Selected State -->
+<div class="group relative flex cursor-pointer flex-col rounded-xl border-2 border-primary bg-white p-6 shadow-glow transition-all hover:-translate-y-1 dark:bg-slate-800 dark:border-primary">
+<div class="absolute right-4 top-4">
+<div class="flex size-6 items-center justify-center rounded-full bg-primary text-white shadow-sm">
+<span class="material-symbols-outlined text-[18px] font-bold">check</span>
+</div>
+</div>
+<div class="mb-4 flex items-center gap-3">
+<div class="flex size-10 items-center justify-center rounded-lg bg-orange-50 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400">
+<span class="material-symbols-outlined filled">currency_bitcoin</span>
+</div>
+<span class="inline-flex items-center rounded-md bg-orange-50 px-2 py-1 text-xs font-medium text-orange-700 ring-1 ring-inset ring-orange-700/10 dark:bg-orange-900/30 dark:text-orange-400">#Crypto</span>
+</div>
+<h3 class="mb-2 text-xl font-bold leading-tight text-slate-900 dark:text-white">Crypto Market Volatility</h3>
+<p class="mb-6 line-clamp-2 text-sm text-slate-500 dark:text-slate-400">Analyzing the latest market swings and what experts are predicting for Q4.</p>
+<div class="mt-auto flex items-center gap-6 border-t border-slate-100 pt-4 dark:border-slate-700">
+<div class="flex items-center gap-1.5 text-sm font-semibold text-slate-700 dark:text-slate-300">
+<span class="material-symbols-outlined text-rose-500 text-[18px] filled">favorite</span>
+                                22k
+                            </div>
+<div class="flex items-center gap-1.5 text-sm font-semibold text-slate-700 dark:text-slate-300">
+<span class="material-symbols-outlined text-blue-500 text-[18px] filled">chat_bubble</span>
+                                3.5k
+                            </div>
+<div class="flex items-center gap-1.5 text-sm font-semibold text-slate-700 dark:text-slate-300">
+<span class="material-symbols-outlined text-green-500 text-[18px]">share</span>
+                                10k
+                            </div>
+<div class="ml-auto flex items-center gap-1 text-xs font-medium text-emerald-600 dark:text-emerald-400">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+                                +24% today
+                            </div>
+</div>
+</div>
+<!-- Card 5: Unselected State -->
+<div class="group relative flex cursor-pointer flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-primary/50 hover:shadow-md dark:border-slate-700 dark:bg-slate-800 dark:hover:border-primary/50">
+<div class="absolute right-4 top-4">
+<div class="flex size-6 items-center justify-center rounded-full border-2 border-slate-300 bg-transparent transition-colors group-hover:border-primary dark:border-slate-600">
+</div>
+</div>
+<div class="mb-4 flex items-center gap-3">
+<div class="flex size-10 items-center justify-center rounded-lg bg-pink-50 text-pink-600 dark:bg-pink-900/30 dark:text-pink-400">
+<span class="material-symbols-outlined filled">health_and_safety</span>
+</div>
+<span class="inline-flex items-center rounded-md bg-pink-50 px-2 py-1 text-xs font-medium text-pink-700 ring-1 ring-inset ring-pink-700/10 dark:bg-pink-900/30 dark:text-pink-400">#MentalHealth</span>
+</div>
+<h3 class="mb-2 text-xl font-bold leading-tight text-slate-900 dark:text-white">Mental Health at Work</h3>
+<p class="mb-6 line-clamp-2 text-sm text-slate-500 dark:text-slate-400">Strategies for maintaining work-life balance and avoiding burnout in high-stress jobs.</p>
+<div class="mt-auto flex items-center gap-6 border-t border-slate-100 pt-4 dark:border-slate-700">
+<div class="flex items-center gap-1.5 text-sm font-semibold text-slate-700 dark:text-slate-300">
+<span class="material-symbols-outlined text-slate-400 text-[18px]">favorite</span>
+                                9.1k
+                            </div>
+<div class="flex items-center gap-1.5 text-sm font-semibold text-slate-700 dark:text-slate-300">
+<span class="material-symbols-outlined text-slate-400 text-[18px]">chat_bubble</span>
+                                600
+                            </div>
+<div class="flex items-center gap-1.5 text-sm font-semibold text-slate-700 dark:text-slate-300">
+<span class="material-symbols-outlined text-slate-400 text-[18px]">share</span>
+                                2.1k
+                            </div>
+</div>
+</div>
+<!-- Card 6: Unselected State -->
+<div class="group relative flex cursor-pointer flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-primary/50 hover:shadow-md dark:border-slate-700 dark:bg-slate-800 dark:hover:border-primary/50">
+<div class="absolute right-4 top-4">
+<div class="flex size-6 items-center justify-center rounded-full border-2 border-slate-300 bg-transparent transition-colors group-hover:border-primary dark:border-slate-600">
+</div>
+</div>
+<div class="mb-4 flex items-center gap-3">
+<div class="flex size-10 items-center justify-center rounded-lg bg-purple-50 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400">
+<span class="material-symbols-outlined filled">movie</span>
+</div>
+<span class="inline-flex items-center rounded-md bg-purple-50 px-2 py-1 text-xs font-medium text-purple-700 ring-1 ring-inset ring-purple-700/10 dark:bg-purple-900/30 dark:text-purple-400">#CreatorEconomy</span>
+</div>
+<h3 class="mb-2 text-xl font-bold leading-tight text-slate-900 dark:text-white">The New Creator Economy</h3>
+<p class="mb-6 line-clamp-2 text-sm text-slate-500 dark:text-slate-400">How micro-influencers are changing the way brands advertise products.</p>
+<div class="mt-auto flex items-center gap-6 border-t border-slate-100 pt-4 dark:border-slate-700">
+<div class="flex items-center gap-1.5 text-sm font-semibold text-slate-700 dark:text-slate-300">
+<span class="material-symbols-outlined text-slate-400 text-[18px]">favorite</span>
+                                15k
+                            </div>
+<div class="flex items-center gap-1.5 text-sm font-semibold text-slate-700 dark:text-slate-300">
+<span class="material-symbols-outlined text-slate-400 text-[18px]">chat_bubble</span>
+                                1.2k
+                            </div>
+<div class="flex items-center gap-1.5 text-sm font-semibold text-slate-700 dark:text-slate-300">
+<span class="material-symbols-outlined text-slate-400 text-[18px]">share</span>
+                                4k
+                            </div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Sticky Bottom Bar -->
+<div class="fixed bottom-0 left-0 right-0 z-50 border-t border-slate-200 bg-white/95 px-6 py-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] backdrop-blur-lg dark:border-slate-800 dark:bg-background-dark/95">
+<div class="mx-auto flex max-w-5xl items-center justify-between">
+<div class="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-4">
+<div class="flex items-center gap-2">
+<div class="flex size-6 items-center justify-center rounded-full bg-primary text-white text-xs font-bold">2</div>
+<span class="font-bold text-slate-900 dark:text-white">Topics Selected</span>
+</div>
+<span class="hidden h-4 w-px bg-slate-300 dark:bg-slate-700 sm:block"></span>
+<button class="text-sm font-medium text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200">Clear selection</button>
+</div>
+<div class="flex items-center gap-4">
+<span class="hidden text-sm text-slate-500 dark:text-slate-400 sm:block">Estimated viral score: <span class="font-bold text-emerald-600 dark:text-emerald-400">High</span></span>
+<button class="flex items-center gap-2 rounded-lg bg-primary px-6 py-2.5 text-sm font-bold text-white shadow-lg shadow-primary/30 transition-all hover:bg-primary/90 hover:shadow-primary/50 focus:ring-4 focus:ring-primary/20">
+<span class="material-symbols-outlined text-[20px]">auto_fix_high</span>
+                        Create Interview
+                    </button>
+</div>
+</div>
+</div>
+</div>
+</body></html>

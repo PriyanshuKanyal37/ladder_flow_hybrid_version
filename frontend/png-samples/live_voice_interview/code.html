@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Live Voice Interview</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1a2332",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "2xl": "2rem", "full": "9999px"},
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for the transcript if needed */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        /* Waveform bar simulation */
+        .wave-bar {
+            width: 6px;
+            border-radius: 9999px;
+            background-color: #135bec;
+            transition: height 0.2s ease;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white overflow-x-hidden selection:bg-primary/20">
+<div class="relative flex min-h-screen w-full flex-col">
+<!-- Top Navigation / Status -->
+<header class="flex items-center justify-between px-6 py-6 md:px-10">
+<div class="flex items-center gap-3">
+<div class="flex items-center justify-center size-10 rounded-xl bg-surface-light dark:bg-surface-dark border border-slate-200 dark:border-slate-800 shadow-sm text-primary">
+<span class="material-symbols-outlined text-[24px]">graphic_eq</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-sm font-bold tracking-tight text-slate-900 dark:text-white">Voice Interview</h1>
+<div class="flex items-center gap-1.5">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+</span>
+<span class="text-xs font-medium text-slate-500 dark:text-slate-400">Live Connection</span>
+</div>
+</div>
+</div>
+<!-- Progress Pill -->
+<div class="hidden md:flex items-center gap-2 bg-surface-light dark:bg-surface-dark border border-slate-200 dark:border-slate-800 rounded-full px-4 py-1.5 shadow-sm">
+<span class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Question</span>
+<span class="text-sm font-bold text-slate-900 dark:text-white">2 <span class="text-slate-400 dark:text-slate-600 font-normal">of</span> 6</span>
+</div>
+<!-- Timer (Optional) -->
+<div class="flex items-center gap-2 text-slate-500 dark:text-slate-400 font-mono text-sm">
+<span class="material-symbols-outlined text-[20px]">schedule</span>
+<span>04:12</span>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex flex-1 flex-col items-center justify-center w-full max-w-3xl mx-auto px-4 pb-32">
+<!-- Mobile Progress Pill (Visible only on small screens) -->
+<div class="md:hidden flex mb-8 items-center gap-2 bg-surface-light dark:bg-surface-dark border border-slate-200 dark:border-slate-800 rounded-full px-4 py-1.5 shadow-sm">
+<span class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Question</span>
+<span class="text-sm font-bold text-slate-900 dark:text-white">2 <span class="text-slate-400 dark:text-slate-600 font-normal">of</span> 6</span>
+</div>
+<!-- Active Listening Visualizer -->
+<div class="relative w-full flex flex-col items-center justify-center py-10">
+<!-- Glowing background effect -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-primary/20 rounded-full blur-[60px] animate-pulse-slow"></div>
+<!-- Waveform Bars -->
+<div aria-label="Audio waveform visualization" class="relative flex items-center justify-center gap-1.5 h-32">
+<!-- Generating a static 'random' wave pattern -->
+<div class="wave-bar h-8 opacity-40"></div>
+<div class="wave-bar h-12 opacity-60"></div>
+<div class="wave-bar h-6 opacity-40"></div>
+<div class="wave-bar h-16 opacity-80"></div>
+<div class="wave-bar h-24"></div>
+<div class="wave-bar h-10 opacity-70"></div>
+<div class="wave-bar h-20 opacity-90"></div>
+<div class="wave-bar h-28 bg-primary"></div>
+<div class="wave-bar h-14 opacity-70"></div>
+<div class="wave-bar h-32 bg-primary"></div>
+<div class="wave-bar h-20 opacity-90"></div>
+<div class="wave-bar h-10 opacity-60"></div>
+<div class="wave-bar h-24"></div>
+<div class="wave-bar h-8 opacity-50"></div>
+<div class="wave-bar h-16 opacity-80"></div>
+<div class="wave-bar h-6 opacity-40"></div>
+<div class="wave-bar h-12 opacity-60"></div>
+<div class="wave-bar h-4 opacity-30"></div>
+</div>
+<div class="mt-6 text-primary font-medium text-sm tracking-widest uppercase opacity-80">Active Listening</div>
+</div>
+<!-- Transcript / Conversation Stream -->
+<div class="w-full flex flex-col gap-6 mt-4 relative">
+<!-- Fade out overlay for top of list to simulate scrolling history -->
+<div class="absolute -top-10 left-0 right-0 h-16 bg-gradient-to-b from-background-light dark:from-background-dark to-transparent z-10 pointer-events-none"></div>
+<!-- Previous Context (Faded) -->
+<div class="flex gap-4 p-4 opacity-40 transition-opacity hover:opacity-60">
+<div class="mt-1 flex-shrink-0">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined text-[18px]">smart_toy</span>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<p class="text-sm font-semibold text-slate-700 dark:text-slate-300">AI Interviewer</p>
+<p class="text-base text-slate-600 dark:text-slate-400 leading-relaxed">Let's start with your background. Can you briefly introduce yourself and your experience with product design?</p>
+</div>
+</div>
+<!-- Current Active Question (Bold) -->
+<div class="flex gap-4 p-4 bg-white dark:bg-surface-dark rounded-xl shadow-sm border border-slate-100 dark:border-slate-800/50">
+<div class="mt-1 flex-shrink-0">
+<div class="size-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px] fill-1">smart_toy</span>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<p class="text-sm font-semibold text-primary">AI Interviewer • <span class="font-normal opacity-70">Current Question</span></p>
+<p class="text-lg md:text-xl font-medium text-slate-900 dark:text-white leading-relaxed">
+                            Tell me about a time you overcame a significant technical challenge. How did you approach the problem?
+                        </p>
+</div>
+</div>
+<!-- Live User Response (Streaming) -->
+<div class="flex gap-4 p-4 pl-6 border-l-2 border-primary/20 ml-6">
+<div class="flex flex-col gap-1 w-full">
+<div class="flex items-center gap-2 mb-1">
+<span class="text-sm font-bold text-slate-900 dark:text-white">You</span>
+<span class="px-2 py-0.5 rounded-full bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 text-[10px] font-bold uppercase tracking-wide">Recording</span>
+</div>
+<p class="text-lg text-slate-700 dark:text-slate-200 leading-relaxed">
+                            Well, it started back in 2021 when we faced a major database migration issue. We were moving from a legacy SQL system to a distributed NoSQL architecture, and we realized halfway through that our data consistency models were... 
+                            <span class="inline-block w-1.5 h-5 bg-primary align-middle ml-0.5 animate-pulse"></span>
+</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Controls Dock -->
+<div class="fixed bottom-8 left-0 right-0 flex justify-center px-4 z-50">
+<div class="flex items-center gap-3 p-2 rounded-2xl bg-white/90 dark:bg-surface-dark/90 backdrop-blur-md shadow-xl border border-slate-200/60 dark:border-slate-700/60">
+<!-- Secondary Action: Pause -->
+<button class="group flex flex-col items-center justify-center size-14 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined text-[28px] group-hover:scale-110 transition-transform">pause_circle</span>
+<span class="text-[10px] font-medium mt-0.5">Pause</span>
+</button>
+<!-- Primary Action: Active Mic Status (Visual only, or clickable to mute) -->
+<button class="relative group flex items-center justify-center size-20 rounded-2xl bg-primary text-white shadow-lg shadow-primary/30 hover:bg-primary/90 transition-all hover:scale-105 active:scale-95">
+<div class="absolute inset-0 rounded-2xl border border-white/20"></div>
+<!-- Ripple effect rings for active mic -->
+<span class="absolute inline-flex h-full w-full rounded-2xl bg-primary opacity-20 animate-ping"></span>
+<div class="flex flex-col items-center z-10">
+<span class="material-symbols-outlined text-[32px]">mic</span>
+<span class="text-[10px] font-bold mt-0.5 tracking-wide">LISTENING</span>
+</div>
+</button>
+<!-- Secondary Action: End Session -->
+<button class="group flex flex-col items-center justify-center size-14 rounded-xl hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors text-slate-600 dark:text-slate-400 hover:text-red-600 dark:hover:text-red-400">
+<span class="material-symbols-outlined text-[28px] group-hover:scale-110 transition-transform">call_end</span>
+<span class="text-[10px] font-medium mt-0.5">End</span>
+</button>
+</div>
+</div>
+</div>
+</body></html>
