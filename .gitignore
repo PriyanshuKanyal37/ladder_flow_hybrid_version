@@ -72,6 +72,7 @@ CLAUDE.md
 UI_reference/
 ui_theme/
 docs/
+voice-agent/
 
 # Temp files
 *.tmp
