@@ -66,6 +66,12 @@ output/
 # Claude Code internal files (not project code)
 .claude/
 ANTIGRAVITY.md
+CLAUDE.md
+
+# Design references and internal docs (local only)
+UI_reference/
+ui_theme/
+docs/
 
 # Temp files
 *.tmp
