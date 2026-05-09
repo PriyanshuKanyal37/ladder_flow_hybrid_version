@@ -39,15 +39,22 @@ interface AngleOption {
   tags: string[];
   match: string;
   trending?: boolean;
+  // Angle-specific outline + agent context. Each angle is a distinct lens
+  // on the topic, so the session arc, talking points, and "why this matters"
+  // must differ — otherwise the outline page and the voice agent see
+  // identical content regardless of which angle the user picked.
+  sessionArc: string;
+  talkingPoints: string[];
+  whyThisMatters: string;
 }
 
-function makeTopicPayload(result: ResearchResult, angle: AngleOption): TrendingTopic {
+function makeTopicPayload(angle: AngleOption): TrendingTopic {
   return {
     rank: 1,
     topic_title: angle.title,
-    global_context: result.deep_context,
-    why_this_matters: result.key_insights.join('. '),
-    key_questions: result.discussion_points,
+    global_context: angle.sessionArc,
+    why_this_matters: angle.whyThisMatters,
+    key_questions: angle.talkingPoints,
   };
 }
 
@@ -166,15 +173,72 @@ export default function TrendingTopicsPage() {
 
   const options = useMemo<AngleOption[]>(() => {
     if (!research) return [];
-    const a = research.key_insights[0] || 'Identify your unique signal before scaling.';
-    const b = research.key_insights[1] || 'Trust compounds faster than distribution hacks.';
-    const c = research.discussion_points[0] || 'What is your defensible founder edge?';
-    const d = research.discussion_points[1] || 'How do you maintain quality as you scale?';
+
+    const insights = research.key_insights.length
+      ? research.key_insights
+      : ['Identify your unique signal before scaling.'];
+    const questions = research.discussion_points.length
+      ? research.discussion_points
+      : ['What is your defensible founder edge?'];
+
+    const a = insights[0];
+    const b = insights[1] || insights[0];
+    const c = questions[0];
+    const d = questions[1] || questions[0];
+    const e = insights[2] || insights[insights.length - 1] || a;
+    const f = questions[questions.length - 1] || c;
+
+    const titleSeed = (research.title || 'this topic').split(/[—:]/)[0].trim();
+
+    // 4 distinct lenses on the same research. Each carries its own
+    // sessionArc / talkingPoints / whyThisMatters so the outline page
+    // and voice agent receive angle-specific context, not raw research.
     const base: AngleOption[] = [
-      { id: 'angle-1', title: research.title, summary: research.deep_context, quote: `"${a}"`, tags: ['Strategy', 'Narrative'], match: '94%', trending: true },
-      { id: 'angle-2', title: a.slice(0, 72), summary: b, quote: `"${research.discussion_points[0] || a}"`, tags: ['Signal', 'Positioning'], match: '89%' },
-      { id: 'angle-3', title: c.slice(0, 72), summary: d, quote: `"${research.discussion_points[2] || b}"`, tags: ['Execution', 'Framework'], match: '82%' },
-      { id: 'angle-4', title: 'AI-Augmented Creative Systems', summary: 'Use AI as a thinking partner, not just a production shortcut, to sharpen strategic originality.', quote: '"The best use of AI is finding better questions."', tags: ['AI', 'Innovation'], match: '78%', trending: true },
+      {
+        id: 'angle-1',
+        title: research.title,
+        summary: research.deep_context,
+        quote: `"${a}"`,
+        tags: ['Strategy', 'Narrative'],
+        match: '94%',
+        trending: true,
+        sessionArc: research.deep_context,
+        talkingPoints: questions,
+        whyThisMatters: insights.join('. '),
+      },
+      {
+        id: 'angle-2',
+        title: a.slice(0, 72),
+        summary: b,
+        quote: `"${questions[0] || a}"`,
+        tags: ['Signal', 'Positioning'],
+        match: '89%',
+        sessionArc: `Signal-driven framing: ${b}\n\n${a}`,
+        talkingPoints: insights.length >= 3 ? insights : questions,
+        whyThisMatters: `${b} ${a}`.trim(),
+      },
+      {
+        id: 'angle-3',
+        title: c.slice(0, 72),
+        summary: d,
+        quote: `"${questions[2] || b}"`,
+        tags: ['Execution', 'Framework'],
+        match: '82%',
+        sessionArc: `Practical execution focus: ${d}\n\n${c}`,
+        talkingPoints: questions,
+        whyThisMatters: questions.slice(0, 3).join('. '),
+      },
+      {
+        id: 'angle-4',
+        title: `What Most Founders Get Wrong About ${titleSeed.slice(0, 40)}`,
+        summary: e,
+        quote: `"${f}"`,
+        tags: ['Contrarian', 'Counter-narrative'],
+        match: '78%',
+        sessionArc: `Counter-narrative — challenging the consensus: ${e}`,
+        talkingPoints: [...questions].reverse(),
+        whyThisMatters: insights.slice().reverse().join('. '),
+      },
     ];
     // Append the user-generated 5th card if present.
     return generatedAngle ? [...base, generatedAngle] : base;
@@ -218,14 +282,20 @@ export default function TrendingTopicsPage() {
         setAngleGenError('Empty angle returned. Try again.');
         return;
       }
+      const summary: string = angle.summary || '';
       const newAngle: AngleOption = {
         id: 'angle-custom-generated',
         title: angle.title,
-        summary: angle.summary || '',
+        summary,
         quote: angle.quote || `"${input}"`,
         tags: Array.isArray(angle.tags) ? angle.tags : ['Custom'],
         match: angle.match || 'Custom',
         trending: false,
+        sessionArc: summary || research.deep_context,
+        talkingPoints: research.discussion_points.length
+          ? research.discussion_points
+          : research.key_insights,
+        whyThisMatters: summary || research.key_insights.join('. '),
       };
       setGeneratedAngle(newAngle);
       setSelectedId(newAngle.id);
@@ -246,15 +316,33 @@ export default function TrendingTopicsPage() {
 
   const handleContinue = () => {
     if (!research) return;
-    const finalAngle = customAngle.trim()
-      ? { id: 'custom', title: customAngle.trim(), summary: research.deep_context, quote: `"${research.key_insights[0] || customAngle}"`, tags: ['Custom'], match: 'User' }
+    const finalAngle: AngleOption = customAngle.trim()
+      ? {
+          id: 'custom',
+          title: customAngle.trim(),
+          summary: research.deep_context,
+          quote: `"${research.key_insights[0] || customAngle}"`,
+          tags: ['Custom'],
+          match: 'User',
+          sessionArc: research.deep_context,
+          talkingPoints: research.discussion_points.length
+            ? research.discussion_points
+            : research.key_insights,
+          whyThisMatters: research.key_insights.join('. '),
+        }
       : selectedOption;
-    sessionStorage.setItem('selected-topics', JSON.stringify([makeTopicPayload(research, finalAngle)]));
-    sessionStorage.setItem('research-context', JSON.stringify({ ...research, title: finalAngle.title }));
+    if (!finalAngle) return;
+    sessionStorage.setItem('selected-topics', JSON.stringify([makeTopicPayload(finalAngle)]));
+    // research-context stores RAW research (never mutated). Back-nav to
+    // /discover/trending must rebuild angles from clean data, otherwise
+    // the displayed titles/summaries drift on each round-trip.
+    sessionStorage.setItem('research-context', JSON.stringify(research));
     // Stamp which keywords this research is tied to. Used on back-nav to
     // detect stale cache when the user changes keywords.
     sessionStorage.setItem('research-context-keywords', keywords);
     sessionStorage.setItem('selected-angle-id', finalAngle.id);
+    // Full angle is the source of truth for /interview/new and the agent.
+    sessionStorage.setItem('selected-angle', JSON.stringify(finalAngle));
     router.push('/interview/new');
   };
 

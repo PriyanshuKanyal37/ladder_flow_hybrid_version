@@ -14,6 +14,9 @@ const SESSION_KEYS = [
     "pending-review",
     "trending-keywords",
     "selected-topics",
+    "selected-angle",
+    "selected-angle-id",
+    "generated-angle",
     "session-rating",
 ];
 

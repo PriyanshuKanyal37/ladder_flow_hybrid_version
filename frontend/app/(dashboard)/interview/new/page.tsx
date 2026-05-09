@@ -7,6 +7,21 @@ import { useTtsCredits } from '@/lib/api/queries';
 import type { ResearchResult } from '@/lib/types/trending';
 import { useUser } from '@/lib/context/UserContext';
 
+// Angle-shape persisted by /discover/trending. Mirrors AngleOption there.
+// Kept loose (no shared type module) so this page stays self-contained.
+interface SelectedAngle {
+  id: string;
+  title: string;
+  summary: string;
+  quote: string;
+  tags: string[];
+  match: string;
+  trending?: boolean;
+  sessionArc: string;
+  talkingPoints: string[];
+  whyThisMatters: string;
+}
+
 function estimateSession(topicCount: number, keywordCount: number, arcLength: number): string {
   // ~3 min per talking point, 2 min per extra keyword (breadth), up to 15 min for dense arc
   const fromTopics = topicCount * 3;
@@ -29,6 +44,7 @@ export default function InterviewSetupPage() {
   const router = useRouter();
   const { user } = useUser();
   const [researchResult, setResearchResult] = useState<ResearchResult | null>(null);
+  const [selectedAngle, setSelectedAngle] = useState<SelectedAngle | null>(null);
   const [userName, setUserName] = useState('Guest');
   const [sessionArc, setSessionArc] = useState('');
   const [topics, setTopics] = useState<string[]>([]);
@@ -71,13 +87,26 @@ export default function InterviewSetupPage() {
   }, [user]);
 
   useEffect(() => {
-    const stored = sessionStorage.getItem('research-context');
-    if (!stored) { router.push('/discover/trending'); return; }
+    const angleRaw = sessionStorage.getItem('selected-angle');
+    const researchRaw = sessionStorage.getItem('research-context');
+    // Both are required: research is the source of truth for the topic;
+    // angle carries the user's chosen lens. Without either, the outline
+    // and the voice agent have no coherent context to build from.
+    if (!angleRaw || !researchRaw) {
+      router.push('/discover/trending');
+      return;
+    }
     try {
-      const ctx = JSON.parse(stored) as ResearchResult;
+      const angle = JSON.parse(angleRaw) as SelectedAngle;
+      const ctx = JSON.parse(researchRaw) as ResearchResult;
       setResearchResult(ctx);
-      setSessionArc(ctx.deep_context);
-      setTopics(ctx.discussion_points.length ? ctx.discussion_points : ctx.key_insights);
+      setSelectedAngle(angle);
+      setSessionArc(angle.sessionArc || ctx.deep_context);
+      setTopics(
+        Array.isArray(angle.talkingPoints) && angle.talkingPoints.length
+          ? angle.talkingPoints
+          : (ctx.discussion_points.length ? ctx.discussion_points : ctx.key_insights),
+      );
       const kw = sessionStorage.getItem('trending-keywords') || '';
       setKeywordCount(kw.split(',').map((k) => k.trim()).filter(Boolean).length || 1);
       setIsLoading(false);
@@ -107,12 +136,15 @@ export default function InterviewSetupPage() {
     setIsGenerating(true);
     setError(null);
     try {
+      const angleTitle = selectedAngle?.title || researchResult.title;
+      const angleWhy =
+        selectedAngle?.whyThisMatters || researchResult.key_insights.join('\n');
       const config = await generateAgentConfig({
-        topic: researchResult.title,
+        topic: angleTitle,
         userName,
-        topic_title: researchResult.title,
+        topic_title: angleTitle,
         global_context: sessionArc,
-        why_this_matters: researchResult.key_insights.join('\n'),
+        why_this_matters: angleWhy,
         key_questions: topics,
         tts_provider: ttsProvider,
       });
@@ -121,7 +153,22 @@ export default function InterviewSetupPage() {
         throw new Error('Invalid LiveKit session response');
       }
       sessionStorage.setItem('agent-config', JSON.stringify(config));
-      sessionStorage.setItem('research-context', JSON.stringify({ ...researchResult, deep_context: sessionArc, discussion_points: topics }));
+      // Persist raw research as-is (research-context is the unmutated source).
+      // Persist updated angle so any in-place edits to sessionArc / topics
+      // survive into the live interview screen.
+      sessionStorage.setItem('research-context', JSON.stringify(researchResult));
+      if (selectedAngle) {
+        sessionStorage.setItem(
+          'selected-angle',
+          JSON.stringify({
+            ...selectedAngle,
+            title: angleTitle,
+            sessionArc,
+            talkingPoints: topics,
+            whyThisMatters: angleWhy,
+          }),
+        );
+      }
       router.push('/interview');
     } catch {
       setError('Failed to initialize the interview agent. Please try again.');
@@ -217,7 +264,7 @@ export default function InterviewSetupPage() {
             style={{ background: 'rgba(233,83,53,0.12)', color: 'var(--accent)', border: '1px solid rgba(233,83,53,0.25)' }}
           >
             <span className="material-symbols-outlined text-[13px]" style={{ fontVariationSettings: "'FILL' 1" }}>label</span>
-            {researchResult.title}
+            {selectedAngle?.title || researchResult.title}
           </span>
         </div>
 

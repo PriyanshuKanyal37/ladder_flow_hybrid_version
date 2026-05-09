@@ -76,6 +76,9 @@ export default function DiscoverPage() {
     if (newKeywordsStr !== prevKeywordsStr) {
       sessionStorage.removeItem('research-context');
       sessionStorage.removeItem('selected-topics');
+      sessionStorage.removeItem('selected-angle');
+      sessionStorage.removeItem('selected-angle-id');
+      sessionStorage.removeItem('generated-angle');
     }
 
     sessionStorage.setItem('trending-keywords', newKeywordsStr);
