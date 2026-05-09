@@ -1,10 +1,10 @@
 'use client';
 
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { setToken } from '@/lib/auth';
 
-export default function OAuthCallbackPage() {
+function OAuthCallbackInner() {
   const router = useRouter();
   const params = useSearchParams();
 
@@ -18,7 +18,6 @@ export default function OAuthCallbackPage() {
     }
 
     setToken(token);
-    // AuthGuard will handle onboarding check on next navigation
     router.replace('/dashboard');
   }, [params, router]);
 
@@ -34,5 +33,13 @@ export default function OAuthCallbackPage() {
         <p className="text-[13px] text-[var(--text-secondary)]">Signing you in&hellip;</p>
       </div>
     </div>
+  );
+}
+
+export default function OAuthCallbackPage() {
+  return (
+    <Suspense>
+      <OAuthCallbackInner />
+    </Suspense>
   );
 }
