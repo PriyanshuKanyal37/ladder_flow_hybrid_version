@@ -35,6 +35,16 @@ class UserManager(UUIDIDMixin, BaseUserManager[User, uuid.UUID]):
     async def on_after_register(self, user: User, request: Optional[Request] = None):
         logger.info("User %s registered.", user.id)
 
+    async def on_after_forgot_password(
+        self, user: User, token: str, request: Optional[Request] = None
+    ):
+        from app.auth.email_service import send_password_reset_email
+        await send_password_reset_email(user.email, token)
+        logger.info("Password reset email sent to user %s.", user.id)
+
+    async def on_after_reset_password(self, user: User, request: Optional[Request] = None):
+        logger.info("Password reset completed for user %s.", user.id)
+
 async def get_user_manager(user_db=Depends(get_user_db)):
     yield UserManager(user_db)
 

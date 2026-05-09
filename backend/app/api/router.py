@@ -12,6 +12,7 @@ from app.api import routes_internal
 from app.api import routes_tts_status
 from app.api import routes_angle
 from app.auth.auth_config import fastapi_users, auth_backend
+from app.auth.routes_google import router as google_oauth_router
 from app.schemas.user_schemas import UserRead, UserCreate, UserUpdate
 
 api_router = APIRouter()
@@ -36,5 +37,9 @@ api_router.include_router(
     fastapi_users.get_register_router(UserRead, UserCreate), prefix="/auth", tags=["auth"]
 )
 api_router.include_router(
+    fastapi_users.get_reset_password_router(), prefix="/auth", tags=["auth"]
+)
+api_router.include_router(
     fastapi_users.get_users_router(UserRead, UserUpdate), prefix="/users", tags=["users"]
 )
+api_router.include_router(google_oauth_router)

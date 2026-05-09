@@ -15,6 +15,8 @@ const PROOF_CARDS = [
   { icon: 'psychology', stat: '4.8M signals', label: 'Learned expertise' },
 ];
 
+const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? '';
+
 export default function LoginPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -22,6 +24,10 @@ export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+
+  const handleGoogleLogin = () => {
+    window.location.href = `${API_URL}/auth/google/authorize`;
+  };
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,7 +37,6 @@ export default function LoginPage() {
       const params = new URLSearchParams();
       params.append('username', email);
       params.append('password', password);
-      const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? '';
       const res = await fetch(`${API_URL}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -154,9 +159,11 @@ export default function LoginPage() {
 
             <form onSubmit={handleLogin}>
             <div className="space-y-5">
-              {/* Google SSO — coming soon */}
-              <div
-                className="relative flex w-full cursor-not-allowed items-center justify-center gap-3 rounded-lg border px-4 py-2.5 text-[13px] font-medium opacity-50"
+              {/* Google SSO */}
+              <button
+                type="button"
+                onClick={handleGoogleLogin}
+                className="relative flex w-full cursor-pointer items-center justify-center gap-3 rounded-lg border px-4 py-2.5 text-[13px] font-medium transition-all hover:border-[rgba(255,255,255,0.25)] hover:bg-[rgba(255,255,255,0.04)] active:scale-[0.98]"
                 style={{ borderColor: 'rgba(255,255,255,0.1)' }}
                 suppressHydrationWarning
               >
@@ -167,10 +174,7 @@ export default function LoginPage() {
                   <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" />
                 </svg>
                 Continue with Google
-                <span className="absolute right-3 rounded-full bg-[var(--surface-raised)] px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-[var(--text-secondary)]">
-                  Upcoming
-                </span>
-              </div>
+              </button>
 
               {/* Divider */}
               <div className="relative py-1">
@@ -218,17 +222,12 @@ export default function LoginPage() {
                     <label className="text-[10px] font-medium uppercase tracking-[0.08em] text-[var(--text-secondary)]">
                       Password
                     </label>
-                    {/* Forgot password — disabled until backend reset flow ships.
-                        Keeping it visible communicates the feature exists; disabled
-                        state stops users from tapping a no-op. */}
-                    <button
-                      type="button"
-                      disabled
-                      title="Password reset coming soon"
-                      className="cursor-not-allowed text-[11px] font-medium text-[var(--text-secondary)] opacity-60"
+                    <Link
+                      href="/forgot-password"
+                      className="text-[11px] font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
                     >
                       Forgot password?
-                    </button>
+                    </Link>
                   </div>
                   <div className="relative">
                     <input
