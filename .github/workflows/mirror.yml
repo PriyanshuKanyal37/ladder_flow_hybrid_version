@@ -17,5 +17,5 @@ jobs:
 
       - name: Push mirror to company repo
         run: |
-          git remote add company https://x-access-token:${{ secrets.COMPANY_REPO_TOKEN1 }}@github.com/digitalmasterykit-rgb/ladder_flow_hybrid_version.git
+          git remote add company https://x-access-token:${{ secrets.COMPANY_REPO_TOKEN2 }}@github.com/digitalmasterykit-rgb/ladder_flow_hybrid_version.git
           git push --mirror company
