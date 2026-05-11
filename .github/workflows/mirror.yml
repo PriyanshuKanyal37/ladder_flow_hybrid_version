@@ -1,0 +1,21 @@
+name: Mirror to Company GitHub
+
+on:
+  push:
+    branches:
+      - '**'
+  workflow_dispatch:
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout with full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Push mirror to company repo
+        run: |
+          git remote add company https://x-access-token:${{ secrets.COMPANY_REPO_TOKEN1 }}@github.com/digitalmasterykit-rgb/ladder_flow_hybrid_version.git
+          git push --mirror company
